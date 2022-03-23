@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="taskScheduler.Views.TasksListView"
+             Title="Задачи">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="plus_math.png"
+                     Clicked="AddButtonClick_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+
+        <ListView IsPullToRefreshEnabled="True"
+                  CachingStrategy="RecycleElement"
+                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                  RefreshCommand="{Binding RefreshCommand}"
+                  RefreshControlColor="Red"
+                  SeparatorVisibility="None"
+                  HasUnevenRows="True"
+                  ItemsSource="{Binding TasksList}"
+                  x:Name="listView"
+                  SelectionMode="Single"
+                  ItemTapped="OnSelectionChanged"
+                  Grid.Row="0">
+            
+            <ListView.ItemTemplate>
+                <DataTemplate x:Name="dataTemplateListView">
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Clicked="DeleteTask_Clicked"
+                                      IconImageSource="delete.png"
+                                      />
+                        </ViewCell.ContextActions>
+                        <StackLayout x:Name="stack1">
+                                <Grid Margin="0,5,5,0"
+                                      ColumnDefinitions="0.5*,0.3*"
+                                      RowDefinitions="25,20"
+                                      x:Name="grid1">
+
+                                <Label Text="{Binding Name}"
+                                       x:Name="taskNameInList"
+                                       FontSize="Medium"
+                                       Padding="5,0,0,0"
+                                       TextColor="Black"
+                                       Grid.Row="0"
+                                       Grid.Column="0"/>
+
+                                <Label Text="{Binding Description}"
+                                       x:Name="desc"
+                                       TextColor="Gray"
+                                       Padding="10,0,0,0"
+                                       FontSize="Small"
+                                       Grid.Row="1"
+                                       Grid.Column="0"/>
+
+                                <Label Text="{Binding Created}"
+                                       TextColor="Silver"
+                                       Padding="0,0,0,5"
+                                       FontSize="Small"
+                                       Grid.Row="0"
+                                       Grid.Column="1"/>
+                            </Grid>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <!--<CollectionView x:Name="collectionView"
+                        SelectionMode="Single"
+                        SelectionChanged="OnSelectionChanged"
+                        Grid.Row="0">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:Name="dataTemplate">
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Clicked="DeleteTask_Clicked"
+                                      IconImageSource="delete.png"/>
+                        </ViewCell.ContextActions>
+                            <StackLayout x:Name="stack1">
+                            <Grid Margin="0,5,5,0"
+                                      ColumnDefinitions="0.5*,0.3*"
+                                      RowDefinitions="25,20"
+                                      x:Name="grid1">
+
+                                <Label Text="{Binding Name}"
+                                       x:Name="taskNameInList"
+                                       FontSize="Medium"
+                                       Padding="5,0,0,0"
+                                       TextColor="Black"
+                                       Grid.Row="0"
+                                       Grid.Column="0"/>
+
+                                <Label Text="{Binding Description}"
+                                       x:Name="desc"
+                                       TextColor="Gray"
+                                       Padding="10,0,0,0"
+                                       FontSize="Small"
+                                       Grid.Row="1"
+                                       Grid.Column="0"/>
+
+                                <Label Text="{Binding Created}"
+                                       TextColor="Silver"
+                                       Padding="0,0,0,5"
+                                       FontSize="Small"
+                                       Grid.Row="0"
+                                       Grid.Column="1"/>
+                            </Grid>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>-->
+    </Grid>
+</ContentPage>

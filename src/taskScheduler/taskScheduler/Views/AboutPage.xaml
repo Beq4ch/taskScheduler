@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="taskScheduler.Views.AboutPage"
+             Title="Описание">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#03fcec</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*">
+        
+        <Frame BackgroundColor="{StaticResource Accent}"
+                   VerticalOptions="StartAndExpand"
+                   HorizontalOptions="Fill">
+            <ContentView Padding="0,10,0,10" 
+                         VerticalOptions="FillAndExpand">
+                <Image Source="logo_task_scheduler.png" 
+                       VerticalOptions="Center" 
+                       HeightRequest="94"/>
+            </ContentView>
+        </Frame>
+        
+        <ScrollView Grid.Row="1">
+            <StackLayout Orientation="Vertical"
+                                 HorizontalOptions="StartAndExpand"
+                                 Padding="30,15,30,24" 
+                                 Spacing="10"
+                                 x:Name="stckL1">
+
+                <Label FontSize="Title" 
+                               Padding="0,10,0,0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span Text="Task shceduler " 
+                                      FontAttributes="Bold" 
+                                      FontSize="Title"/>
+                                <Span Text="-  приложение позволяющее зафиксировать запланированные задачи с последующим напоминанием о их начале и завершении."/>
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Text="Вы можете не переживать о том, что забудете выполнить какую-либо задачу разной степени важности, в случае, если запишите её в данном приложении. Приложение напомнит вам о её начале, на основе заданного промежутка времени напоминания." 
+                               FontSize="16" 
+                               Padding="0,0,0,0"
+                               HorizontalTextAlignment="Start"/>
+
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>
