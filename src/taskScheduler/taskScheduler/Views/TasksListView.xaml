@@ -36,7 +36,6 @@
                             <MenuItem Clicked="DeleteTask_Clicked"
                                       IconImageSource="delete.png"
                                       />
-                            <MenuItem Text="ddf"/>
                         </ViewCell.ContextActions>
                         <StackLayout x:Name="stack1">
                                 <Grid Margin="0,5,5,0"
