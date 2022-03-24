@@ -7,7 +7,7 @@ namespace taskScheduler.Data
 {
     public class TasksDB
     {
-        readonly SQLiteAsyncConnection db;
+        public SQLiteAsyncConnection db;
 
 
         public TasksDB(string connectionString)

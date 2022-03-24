@@ -14,6 +14,7 @@ using SQLite;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using System.Collections.ObjectModel;
+using taskScheduler.Data;
 
 namespace taskScheduler.Views
 {
@@ -22,10 +23,13 @@ namespace taskScheduler.Views
     {
         public ObservableCollection<TaskData> TasksList { get; set; }
 
+        public IEnumerable<TaskData> selectdd { get; set; }
+
         public AsyncCommand RefreshCommand { get; }
         public TasksListView()
         {
             InitializeComponent();
+            RefreshCommand = new AsyncCommand(Refresh);
         }
         
         protected override async void OnAppearing()
@@ -65,7 +69,21 @@ namespace taskScheduler.Views
 
             await Task.Delay(2000);
 
+            TasksList.Clear();
+
+            var tasks = await App.TasksDB.GetTasksAsync();
+
             IsBusy = false;
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            
+
+            var selection = await App.TasksDB.db.QueryAsync<TaskData>(
+                "SELECT * FROM Tasks WHERE Created = ?", "{System.DateTime.Year}");
+            foreach (var k in selection)
+                LabelDate.Text = Convert.ToString(k.Created);
         }
     }
 }

@@ -37,7 +37,8 @@
                                       IconImageSource="delete.png"
                                       />
                         </ViewCell.ContextActions>
-
+                        <Grid>
+                        
                         <StackLayout x:Name="stack1">
                                 <Grid Margin="0,5,5,0"
                                       ColumnDefinitions="0.5*,0.3*"
@@ -68,10 +69,21 @@
                                        Grid.Column="1"/>
                             </Grid>
                         </StackLayout>
+                            
+                        </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <StackLayout VerticalOptions="EndAndExpand">
+            <Button Clicked="Button_Clicked"
+                    Text="Out Put Date"
+                    CornerRadius="25"/>
+            <Label x:Name="LabelDate"
+                   Text="Test"
+                   TextColor="Black"
+                   FontSize="Large"/>
+        </StackLayout>
         <!--<CollectionView x:Name="collectionView"
                         SelectionMode="Single"
                         SelectionChanged="OnSelectionChanged"

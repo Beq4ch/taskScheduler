@@ -8,6 +8,7 @@ using taskScheduler.CustomInterfaceRepresentation;
 
 namespace taskScheduler.Models
 {
+    [Table("Tasks")]
     public class TaskData
     {
         [PrimaryKey, AutoIncrement]
