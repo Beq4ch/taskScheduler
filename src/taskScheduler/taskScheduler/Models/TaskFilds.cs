@@ -23,15 +23,5 @@ namespace taskScheduler.Models
         public DateTime Replay { get; set; }
         public DateTime DueDate { get; set; }
         public DateTime Created { get; set; }
-
-        public List<DObject> DObjects { get; set; }
-    }
-
-    [Table("DynamicObject")]
-    public class DObject
-    {
-        public Checkbox stepDone { get; set; }
-        public XEditor step { get; set; }
-        public string TaskCreatedDate { get; set; }
     }
 }

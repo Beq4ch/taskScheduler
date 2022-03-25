@@ -89,6 +89,22 @@ namespace taskScheduler.Views
                 "SELECT * FROM Tasks WHERE Created = ?", "{System.DateTime.Year}");
             foreach (var k in selection)
                 LabelDate.Text = Convert.ToString(k.Created);
+           
+            listView.ItemsSource = await App.TasksDB.db.QueryAsync<TaskData>(
+                "SELECT * FROM Tasks WHERE TaskCreatedDate = ?", DateTime.Now.ToString("dd.MM.yyyy"));
+                
+            
         }
+        private async void Button_Clicked_Yesterday(object sender, EventArgs e)
+        {
+            DateTime date = DateTime.Now;
+            date =date.AddDays(-1);                   
+          listView.ItemsSource = await App.TasksDB.db.QueryAsync<TaskData>(
+                "SELECT * FROM Tasks WHERE TaskCreatedDate = ?", date.ToString("dd.MM.yyyy"));
+           
+
+        }
+
+
     }
 }
