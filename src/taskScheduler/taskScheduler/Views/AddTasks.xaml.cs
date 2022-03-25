@@ -28,7 +28,7 @@ namespace taskScheduler.Views
         {
             InitializeComponent();
 
-            BindingContext = new TaskData();
+            BindingContext = new TaskFilds();
 
 
         }
@@ -38,7 +38,7 @@ namespace taskScheduler.Views
             {
                 int id = int.Parse(value);
 
-                TaskData task = await App.TasksDB.GetTaskAsync(id);
+                TaskFilds task = await App.TasksDB.GetTaskAsync(id);
 
                 BindingContext = task;
             }
@@ -58,7 +58,7 @@ namespace taskScheduler.Views
                     OnSaveButton_Clicked(saveButton, EventArgs.Empty);
                 else
                 {
-                    TaskData task = (TaskData)BindingContext;
+                    TaskFilds task = (TaskFilds)BindingContext;
 
                     if (!string.IsNullOrWhiteSpace(task.Name))
                     {
@@ -78,7 +78,7 @@ namespace taskScheduler.Views
 
         private async void OnSaveButton_Clicked(object sender, EventArgs e)
         {
-            TaskData task = (TaskData)BindingContext;
+            TaskFilds task = (TaskFilds)BindingContext;
 
             task.Created = DateTime.Now;
 
@@ -98,7 +98,7 @@ namespace taskScheduler.Views
 
         private async void OnDeleteButton_Clicked(object sender, EventArgs e)
         {
-            TaskData task = (TaskData)BindingContext;
+            TaskFilds task = (TaskFilds)BindingContext;
 
             await App.TasksDB.DeleteNoteAsync(task);
 
@@ -123,46 +123,57 @@ namespace taskScheduler.Views
 
             gridStep.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto});
 
-            TaskData steps = new TaskData();
-            /*Binding bindingStepsDone = new Binding { Source = steps, Path = "StepIsDone" };*/
+            TaskFilds steps = new TaskFilds();
 
-            Checkbox stepDone = new Checkbox {
+            Binding bindingStepsDone = new Binding { Source = steps, Path = "StepIsDone" };
+
+            DObject stepD = new DObject();
+            stepD.stepDone.OutlineColor = Color.Blue;
+            stepD.stepDone.Margin = new Thickness(0);
+            stepD.stepDone.FillColor = Color.Blue;
+            stepD.stepDone.CheckColor = Color.White;
+            stepD.stepDone.Shape = Shape.Circle;
+
+            /*stepD.stepDone.IsChecked = Convert.ToBoolean(bindingStepsDone);*/
+
+            /*Checkbox stepDone = new Checkbox()
+            {
                 OutlineColor = Color.Blue,
                 Margin = 0,
                 FillColor = Color.Blue,
                 CheckColor = Color.White,
                 Shape = Shape.Circle
-            };
-
-            /*Checkbox stepDone = new Checkbox()
-            {
-                
-                *//*IsChecked = Convert.ToBoolean(bindingStepsDone)*//*
+                IsChecked = Convert.ToBoolean(bindingStepsDone)
             };*/
 
             /*stepDone.SetBinding(Checkbox.IsCheckedProperty, bindingStepsDone);*/
 
             Binding bindingSteps = new Binding { Source = steps, Path = "Step" };
 
-            XEditor step = new XEditor
+            DObject stepObj = new DObject();
+
+            stepObj.step.Placeholder = "Добавить шаг";
+            stepObj.step.MaxLength = 256;
+
+            /*XEditor step = new XEditor
             {
                 Placeholder = "Добавить шаг",
                 MaxLength = 256,
                 Margin = 0,
                 Text = "Hi",
-                AutoSize = EditorAutoSizeOption.TextChanges
-            };
+                AutoSize = Xamarin.Forms.EditorAutoSizeOption.TextChanges
+            };*/
 
-            step.SetBinding(XEditor.TextProperty, bindingSteps);
+            stepObj.step.SetBinding(XEditor.TextProperty, bindingSteps);
             /*stepTaskDone_IsCheckedChanged(stepDone, (CheckedChangedEventArgs)EventArgs.Empty);*/
 
 
-            gridStep.Children.Add(stepDone, 0, rowsCount);
+            gridStep.Children.Add(stepD.stepDone, 0, rowsCount);
 
-            gridStep.Children.Add(step, 1, rowsCount);
+            gridStep.Children.Add(stepObj.step, 1, rowsCount);
 
 
-            TaskData task = (TaskData)BindingContext;
+            TaskFilds task = (TaskFilds)BindingContext;
 
             task.Created = DateTime.Now;
 
@@ -182,7 +193,7 @@ namespace taskScheduler.Views
 
         private async void saveTaskName_Completed(object sender, EventArgs e)
         {
-            TaskData task = (TaskData)BindingContext;
+            TaskFilds task = (TaskFilds)BindingContext;
 
             task.Created = DateTime.Now;
 

@@ -14,22 +14,22 @@ namespace taskScheduler.Data
         {
             db = new SQLiteAsyncConnection(connectionString);
 
-            db.CreateTableAsync<TaskData>().Wait();
+            db.CreateTableAsync<TaskFilds>().Wait();
         }
 
-        public Task<List<TaskData>> GetTasksAsync()
+        public Task<List<TaskFilds>> GetTasksAsync()
         {
-            return db.Table<TaskData>().ToListAsync();
+            return db.Table<TaskFilds>().ToListAsync();
         }
 
-        public Task<TaskData> GetTaskAsync(int id)
+        public Task<TaskFilds> GetTaskAsync(int id)
         {
-            return db.Table<TaskData>()
+            return db.Table<TaskFilds>()
                                     .Where(i => i.ID.Equals(id))
                                     .FirstOrDefaultAsync();
         } 
 
-        public Task<int> SaveTaskAsync (TaskData task)
+        public Task<int> SaveTaskAsync (TaskFilds task)
         {
             if (task.ID != 0)
                 return db.UpdateAsync(task);
@@ -37,7 +37,7 @@ namespace taskScheduler.Data
                 return db.InsertAsync(task);
         }
 
-        public Task<int> DeleteNoteAsync(TaskData task)
+        public Task<int> DeleteNoteAsync(TaskFilds task)
         {
             return db.DeleteAsync(task);
         }

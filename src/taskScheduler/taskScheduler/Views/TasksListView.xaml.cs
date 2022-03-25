@@ -21,20 +21,25 @@ namespace taskScheduler.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TasksListView : ContentPage
     {
-        public ObservableCollection<TaskData> TasksList { get; set; }
+        public ObservableCollection<TaskFilds> TasksList { get; set; }
 
-        public IEnumerable<TaskData> selectdd { get; set; }
+        public IEnumerable<TaskFilds> selectdd { get; set; }
 
         public AsyncCommand RefreshCommand { get; }
         public TasksListView()
         {
             InitializeComponent();
+
+            
+
+            
+
             RefreshCommand = new AsyncCommand(Refresh);
         }
         
         protected override async void OnAppearing()
         {
-            BindingContext = new TaskData();
+            BindingContext = new TaskFilds();
 
             listView.ItemsSource = await App.TasksDB.GetTasksAsync();
 
@@ -50,7 +55,7 @@ namespace taskScheduler.Views
         {
             if(e.Item != null)
             {
-                TaskData task = (TaskData)e.Item;
+                TaskFilds task = (TaskFilds)e.Item;
                 await Shell.Current.GoToAsync(
                     $"{nameof(AddTasks)}?{nameof(AddTasks.ItemID)}={task.ID.ToString()}");
             }
@@ -58,7 +63,7 @@ namespace taskScheduler.Views
 
         private async void DeleteTask_Clicked(object sender, EventArgs e)
         {
-            TaskData task = (TaskData)BindingContext;
+            TaskFilds task = (TaskFilds)BindingContext;
 
             await App.TasksDB.DeleteNoteAsync(task);
 
@@ -80,7 +85,7 @@ namespace taskScheduler.Views
         {
             
 
-            var selection = await App.TasksDB.db.QueryAsync<TaskData>(
+            var selection = await App.TasksDB.db.QueryAsync<TaskFilds>(
                 "SELECT * FROM Tasks WHERE Created = ?", "{System.DateTime.Year}");
             foreach (var k in selection)
                 LabelDate.Text = Convert.ToString(k.Created);

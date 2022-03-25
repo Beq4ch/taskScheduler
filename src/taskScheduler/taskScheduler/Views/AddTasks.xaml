@@ -56,8 +56,7 @@
                                 Text="{Binding Name}"
                                 AutoSize="TextChanges"
                                 Margin="0,0,0,0"
-                                FontAttributes="Bold"
-                                Completed="AddStep_Completed"/>
+                                FontAttributes="Bold"/>
             </Grid>
             <Grid RowDefinitions="auto"
                   ColumnDefinitions="auto"
@@ -81,7 +80,8 @@
                                 Grid.Row="0"
                                 Margin="0,0,0,0"
                                 Text="{Binding Step}"
-                                AutoSize="TextChanges"/>
+                                AutoSize="TextChanges"
+                                Completed="AddStep_Completed"/>
             </Grid>
         </StackLayout>
             </Frame>

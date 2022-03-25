@@ -9,7 +9,7 @@ using taskScheduler.CustomInterfaceRepresentation;
 namespace taskScheduler.Models
 {
     [Table("Tasks")]
-    public class TaskData
+    public class TaskFilds
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
@@ -18,10 +18,21 @@ namespace taskScheduler.Models
         public bool IsCompleted { get; set; }
         public bool StepIsDone { get; set; }
         public string Description { get; set; }
-        public DateTime DistributionByDay { get; set; }
         public string Importance { get; set; }
+        public DateTime DistributionByDay { get; set; }
         public DateTime Replay { get; set; }
         public DateTime DueDate { get; set; }
         public DateTime Created { get; set; }
+
+        public List<DObject> DObjects { get; set; }
+    }
+
+    [Table("DynamicObject")]
+    public class DObject
+    {
+        public Checkbox stepDone { get; set; }
+        public XEditor step { get; set; }
+
+
     }
 }
