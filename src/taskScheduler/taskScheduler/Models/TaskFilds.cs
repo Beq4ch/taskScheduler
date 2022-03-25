@@ -32,7 +32,6 @@ namespace taskScheduler.Models
     {
         public Checkbox stepDone { get; set; }
         public XEditor step { get; set; }
-
-
+        public string TaskCreatedDate { get; set; }
     }
 }
