@@ -19,9 +19,17 @@ namespace taskScheduler.Models
         public bool StepIsDone { get; set; }
         public string Description { get; set; }
         public string Importance { get; set; }
+        public string TaskCreatedDate { get; set; }
         public DateTime DistributionByDay { get; set; }
         public DateTime Replay { get; set; }
         public DateTime DueDate { get; set; }
         public DateTime Created { get; set; }
     }
+
+    public class DObject
+    {
+        public XEditor step { get; set; }
+        public Checkbox stepDone { get; set; }
+    }
+
 }
