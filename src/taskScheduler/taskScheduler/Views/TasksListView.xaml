@@ -76,13 +76,21 @@
             </ListView.ItemTemplate>
         </ListView>
         <StackLayout VerticalOptions="EndAndExpand">
-            <Button Clicked="Button_Clicked"
+            <Grid>
+            <Button HorizontalOptions="Center"
+                    Clicked="Button_Clicked"
                     Text="Out Put Date"
                     CornerRadius="25"/>
-            <Label x:Name="LabelDate"
+            <Button HorizontalOptions="Start" 
+                    Text="yesterday"
+                    Clicked="Button_Clicked_Yesterday"
+                    CornerRadius="25"/>
+            </Grid>
+                <Label x:Name="LabelDate"
                    Text="Test"
                    TextColor="Black"
                    FontSize="Large"/>
+           
         </StackLayout>
         <!--<CollectionView x:Name="collectionView"
                         SelectionMode="Single"

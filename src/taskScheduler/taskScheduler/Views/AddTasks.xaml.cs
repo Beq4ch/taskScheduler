@@ -81,6 +81,7 @@ namespace taskScheduler.Views
             TaskData task = (TaskData)BindingContext;
 
             task.Created = DateTime.Now;
+            task.TaskCreatedDate = DateTime.Now.ToString("dd.MM.yyyy");
 
             if (!string.IsNullOrWhiteSpace(task.Name))
                 await App.TasksDB.SaveTaskAsync(task);
@@ -164,7 +165,7 @@ namespace taskScheduler.Views
 
             TaskData task = (TaskData)BindingContext;
 
-            task.Created = DateTime.Now;
+            task.Created = DateTime.Now;        
 
             if (!string.IsNullOrWhiteSpace(task.Name))
                 await App.TasksDB.SaveTaskAsync(task);

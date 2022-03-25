@@ -23,5 +23,6 @@ namespace taskScheduler.Models
         public DateTime Replay { get; set; }
         public DateTime DueDate { get; set; }
         public DateTime Created { get; set; }
+        public string TaskCreatedDate { get; set; }
     }
 }
