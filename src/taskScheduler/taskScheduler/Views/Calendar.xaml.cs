@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using taskScheduler.Views;
-using Xamarin.Forms;
 
-namespace taskScheduler
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace taskScheduler.Views
 {
-    public partial class AppShell : Shell
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class Calendar : ContentPage
     {
-        public AppShell()
+        public Calendar()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(AddTasks), typeof(AddTasks));
         }
     }
 }

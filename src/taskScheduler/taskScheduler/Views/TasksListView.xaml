@@ -1,22 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:xc="clr-namespace:XCalendar;assembly=XCalendar"
              x:Class="taskScheduler.Views.TasksListView"
              Title="Задачи">
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="CurDate"/>
         <ToolbarItem IconImageSource="plus_math.png"
                      Clicked="AddButtonClick_Clicked"/>
     </ContentPage.ToolbarItems>
-
-    <Grid>
+   
+        <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-
-        <ListView IsPullToRefreshEnabled="True"
+        <StackLayout>
+            <xc:CalendarView HorizontalOptions="Fill" 
+                             VerticalOptions="Fill" 
+                             IsVisible="false" 
+                             x:Name="Calendarobj" 
+                             DateSelectionChanged="Calendarobj_DateSelectionChanged" 
+                             SelectionType="Single"
+                             />
+            <ListView IsPullToRefreshEnabled="True"
                   CachingStrategy="RecycleElement"
                   IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                   RefreshCommand="{Binding RefreshCommand}"
@@ -28,24 +37,24 @@
                   SelectionMode="Single"
                   ItemTapped="OnSelectionChanged"
                   Grid.Row="0">
-            
-            <ListView.ItemTemplate>
-                <DataTemplate x:Name="dataTemplateListView">
-                    <ViewCell>
-                        <ViewCell.ContextActions>
-                            <MenuItem Clicked="DeleteTask_Clicked"
+
+                <ListView.ItemTemplate>
+                    <DataTemplate x:Name="dataTemplateListView">
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Clicked="DeleteTask_Clicked"
                                       IconImageSource="delete.png"
                                       />
-                        </ViewCell.ContextActions>
-                        <Grid>
-                        
-                        <StackLayout x:Name="stack1">
-                                <Grid Margin="0,5,5,0"
+                            </ViewCell.ContextActions>
+                            <Grid>
+
+                                <StackLayout x:Name="stack1">
+                                    <Grid Margin="0,5,5,0"
                                       ColumnDefinitions="0.5*,0.3*"
                                       RowDefinitions="25,20"
                                       x:Name="grid1">
 
-                                <Label Text="{Binding Name}"
+                                        <Label Text="{Binding Name}"
                                        x:Name="taskNameInList"
                                        FontSize="Medium"
                                        Padding="5,0,0,0"
@@ -53,7 +62,7 @@
                                        Grid.Row="0"
                                        Grid.Column="0"/>
 
-                                <Label Text="{Binding Description}"
+                                        <Label Text="{Binding Description}"
                                        x:Name="desc"
                                        TextColor="Gray"
                                        Padding="10,0,0,0"
@@ -61,38 +70,40 @@
                                        Grid.Row="1"
                                        Grid.Column="0"/>
 
-                                <Label Text="{Binding Created}"
+                                        <Label Text="{Binding TaskCreatedDate}"
                                        TextColor="Silver"
                                        Padding="0,0,0,5"
                                        FontSize="Small"
                                        Grid.Row="0"
                                        Grid.Column="1"/>
+                                    </Grid>
+                                </StackLayout>
+
                             </Grid>
-                        </StackLayout>
-                            
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <StackLayout VerticalOptions="EndAndExpand">
-            <Grid>
-            <Button HorizontalOptions="Center"
-                    Clicked="Button_Clicked"
-                    Text="Out Put Date"
-                    CornerRadius="25"/>
-            <Button HorizontalOptions="Start" 
-                    Text="yesterday"
-                    Clicked="Button_Clicked_Yesterday"
-                    CornerRadius="25"/>
-            </Grid>
-                <Label x:Name="LabelDate"
-                   Text="Test"
-                   TextColor="Black"
-                   FontSize="Large"/>
-           
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
-        <!--<CollectionView x:Name="collectionView"
+        <StackLayout VerticalOptions="End" Background="#045adb">
+                <Grid>
+                    <Button x:Name="ButCalendar"
+                    HorizontalOptions="Start"
+                    Clicked="Button_Clicked_Calendar"
+                    Text="Calendar"
+                    CornerRadius="25"/>
+                    <Button x:Name="ButToday"
+                    HorizontalOptions="Center"
+                    Clicked="Button_Clicked"
+                    CornerRadius="25"/>
+                    <Button x:Name="ButTomorrow"
+                    HorizontalOptions="End" 
+                    Clicked="Button_Clicked_Tomorrow"
+                    CornerRadius="25"/>
+                </Grid>         
+            </StackLayout>
+         
+            <!--<CollectionView x:Name="collectionView"
                         SelectionMode="Single"
                         SelectionChanged="OnSelectionChanged"
                         Grid.Row="0">
@@ -142,5 +153,6 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>-->
+       
     </Grid>
 </ContentPage>
