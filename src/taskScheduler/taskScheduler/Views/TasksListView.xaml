@@ -29,27 +29,27 @@
                   CachingStrategy="RecycleElement"
                   IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                   RefreshCommand="{Binding RefreshCommand}"
+                  ItemsSource="{Binding TasksList}"
                   RefreshControlColor="Red"
                   SeparatorVisibility="None"
                   HasUnevenRows="True"
-                  ItemsSource="{Binding TasksList}"
                   x:Name="listView"
                   SelectionMode="Single"
                   ItemTapped="OnSelectionChanged"
                   Grid.Row="0">
-
-                <ListView.ItemTemplate>
-                    <DataTemplate x:Name="dataTemplateListView">
-                        <ViewCell>
-                            <ViewCell.ContextActions>
-                                <MenuItem Clicked="DeleteTask_Clicked"
+            
+            <ListView.ItemTemplate>
+                <DataTemplate x:Name="dataTemplateListView">
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Clicked="DeleteTask_Clicked"
                                       IconImageSource="delete.png"
                                       />
-                            </ViewCell.ContextActions>
-                            <Grid>
-
-                                <StackLayout x:Name="stack1">
-                                    <Grid Margin="0,5,5,0"
+                        </ViewCell.ContextActions>
+                        <Grid>
+                        
+                        <StackLayout x:Name="stack1">
+                                <Grid Margin="0,5,5,0"
                                       ColumnDefinitions="0.5*,0.3*"
                                       RowDefinitions="25,20"
                                       x:Name="grid1">
@@ -100,10 +100,14 @@
                     HorizontalOptions="End" 
                     Clicked="Button_Clicked_Tomorrow"
                     CornerRadius="25"/>
-                </Grid>         
-            </StackLayout>
-         
-            <!--<CollectionView x:Name="collectionView"
+            </Grid>
+                <Label x:Name="LabelDate"
+                   Text="Test"
+                   TextColor="Black"
+                   FontSize="Large"/>
+           
+        </StackLayout>
+        <!--<CollectionView x:Name="collectionView"
                         SelectionMode="Single"
                         SelectionChanged="OnSelectionChanged"
                         Grid.Row="0">
@@ -153,6 +157,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>-->
-       
     </Grid>
 </ContentPage>

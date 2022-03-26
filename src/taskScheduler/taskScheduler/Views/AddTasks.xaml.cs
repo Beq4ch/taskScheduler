@@ -31,6 +31,8 @@ namespace taskScheduler.Views
             BindingContext = new TaskFilds();
 
 
+
+
         }
         private async void LoadTask(string value)
         {
@@ -106,7 +108,7 @@ namespace taskScheduler.Views
             await Shell.Current.GoToAsync("..");
         }
 
-        private void taskDone_CheckedChanged(object sender, CheckedChangedEventArgs e )
+        private void TaskDone_CheckedChanged(object sender, CheckedChangedEventArgs e )
         {
             StrikethroughEditor strikethrough = new StrikethroughEditor();
             if (taskDone.IsChecked)
@@ -120,24 +122,25 @@ namespace taskScheduler.Views
         {
             rowsCount++;
 
-            gridStep.RowDefinitions = new RowDefinitionCollection();
-
-            gridStep.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto});
+            gridStep.RowDefinitions = new RowDefinitionCollection
+            {
+                new RowDefinition { Height = GridLength.Auto }
+            };
 
             TaskFilds steps = new TaskFilds();
 
             Binding bindingStepsDone = new Binding { Source = steps, Path = "StepIsDone" };
 
-            DObject stepD = new DObject();
-            stepD.stepDone.OutlineColor = Color.Blue;
-            stepD.stepDone.Margin = new Thickness(0);
-            stepD.stepDone.FillColor = Color.Blue;
-            stepD.stepDone.CheckColor = Color.White;
-            stepD.stepDone.Shape = Shape.Circle;
+            /*Models.XEditorUI stepD = new Models.XEditorUI();
+            stepD.StepDone.OutlineColor = Color.Blue;
+            stepD.StepDone.Margin = new Thickness(0);
+            stepD.StepDone.FillColor = Color.Blue;
+            stepD.StepDone.CheckColor = Color.White;
+            stepD.StepDone.Shape = Shape.Circle;*/
 
-            /*stepD.stepDone.IsChecked = Convert.ToBoolean(bindingStepsDone);*/
+            /*stepD.StepDone.IsChecked = Convert.ToBoolean(bindingStepsDone);*/
 
-            /*Checkbox stepDone = new Checkbox()
+            /*Checkbox StepDone = new Checkbox()
             {
                 OutlineColor = Color.Blue,
                 Margin = 0,
@@ -147,16 +150,16 @@ namespace taskScheduler.Views
                 IsChecked = Convert.ToBoolean(bindingStepsDone)
             };*/
 
-            /*stepDone.SetBinding(Checkbox.IsCheckedProperty, bindingStepsDone);*/
+            /*StepDone.SetBinding(Checkbox.IsCheckedProperty, bindingStepsDone);*/
 
             Binding bindingSteps = new Binding { Source = steps, Path = "Step" };
 
-            DObject stepObj = new DObject();
+            /*Models.XEditorUI stepObj = new Models.XEditorUI();*/
 
-            stepObj.step.Placeholder = "Добавить шаг";
-            stepObj.step.MaxLength = 256;
+            /*stepObj.Step.Placeholder = "Добавить шаг";
+            stepObj.Step.MaxLength = 256;*/
 
-            /*XEditor step = new XEditor
+            /*XEditor Step = new XEditor
             {
                 Placeholder = "Добавить шаг",
                 MaxLength = 256,
@@ -165,13 +168,13 @@ namespace taskScheduler.Views
                 AutoSize = Xamarin.Forms.EditorAutoSizeOption.TextChanges
             };*/
 
-            stepObj.step.SetBinding(XEditor.TextProperty, bindingSteps);
-            /*stepTaskDone_IsCheckedChanged(stepDone, (CheckedChangedEventArgs)EventArgs.Empty);*/
+           /* stepObj.Step.SetBinding(XEditor.TextProperty, bindingSteps);
+            *//*stepTaskDone_IsCheckedChanged(StepDone, (CheckedChangedEventArgs)EventArgs.Empty);*//*
 
 
-            gridStep.Children.Add(stepD.stepDone, 0, rowsCount);
+            gridStep.Children.Add(stepD.StepDone, 0, rowsCount);
 
-            gridStep.Children.Add(stepObj.step, 1, rowsCount);
+            gridStep.Children.Add(stepObj.Step, 1, rowsCount);*/
 
 
             TaskFilds task = (TaskFilds)BindingContext;
@@ -183,7 +186,7 @@ namespace taskScheduler.Views
 
         }
 
-        private void stepTaskDone_IsCheckedChanged(object sender, CheckedChangedEventArgs e)
+        private void StepTaskDone_IsCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             StrikethroughEditor strike = new StrikethroughEditor();
             if (stepTaskDone.IsChecked)
@@ -192,7 +195,7 @@ namespace taskScheduler.Views
                 stepTask.Effects.Clear();
         }
 
-        private async void saveTaskName_Completed(object sender, EventArgs e)
+        private async void SaveTaskName_Completed(object sender, EventArgs e)
         {
             TaskFilds task = (TaskFilds)BindingContext;
 

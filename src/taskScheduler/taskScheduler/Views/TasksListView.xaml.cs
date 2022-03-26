@@ -51,6 +51,10 @@ namespace taskScheduler.Views
         }
         private async void AddButtonClick_Clicked(object sender, EventArgs e)
         {
+            TaskFilds task = (TaskFilds)BindingContext;
+
+            task.TaskCreatedDate = DateTime.Now.ToString("dd.MM.yyyy");
+
             await Shell.Current.GoToAsync(nameof(AddTasks));
             
         }
@@ -85,9 +89,9 @@ namespace taskScheduler.Views
             IsBusy = false;
         }
 
-        private async void Button_Clicked(object sender, EventArgs e)
+        private async void Button_Clicked_ToDay(object sender, EventArgs e)
         {
-           
+
             listView.ItemsSource = await App.TasksDB.db.QueryAsync<TaskFilds>(
                 "SELECT * FROM Tasks WHERE TaskCreatedDate = ?", Date.ToString("dd.MM.yyyy"));
                 
@@ -99,6 +103,12 @@ namespace taskScheduler.Views
                 "SELECT * FROM Tasks WHERE TaskCreatedDate = ?", Date.AddDays(1).ToString("dd.MM.yyyy"));
            
 
+        private async void Button_Clicked_Tommorow(object sender, EventArgs e)
+        {
+            DateTime date = DateTime.Now;
+            date = date.AddDays(+1);
+            listView.ItemsSource = await App.TasksDB.db.QueryAsync<TaskFilds>(
+                  "SELECT * FROM Tasks WHERE TaskCreatedDate = ?", date.ToString("dd.MM.yyyy"));
         }
         private async void Button_Clicked_Calendar(object sender, EventArgs e)
         {

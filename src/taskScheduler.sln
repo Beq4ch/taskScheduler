@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "taskScheduler.UWP", "taskSc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "taskScheduler.Android", "taskScheduler\taskScheduler.Android\taskScheduler.Android.csproj", "{094AD939-8459-4E49-A688-C39570FE4F22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "taskScheduler", "taskScheduler\taskScheduler\taskScheduler.csproj", "{586B4C51-ADD1-49C2-9D43-A3ABF80905BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "taskScheduler", "taskScheduler\taskScheduler\taskScheduler.csproj", "{586B4C51-ADD1-49C2-9D43-A3ABF80905BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

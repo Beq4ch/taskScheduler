@@ -37,7 +37,7 @@
                   Margin="0,0,0,-10">
 
                 <ia:Checkbox x:Name="taskDone"
-                             IsCheckedChanged="taskDone_CheckedChanged"
+                             IsCheckedChanged="TaskDone_CheckedChanged"
                              IsChecked="{Binding IsCompleted}"
                              OutlineColor="Blue"
                              FillColor="Blue"
@@ -63,7 +63,7 @@
                   Margin="15,0,0,0"
                   x:Name="gridStep">
                 <ia:Checkbox x:Name="stepTaskDone"
-                             IsCheckedChanged="stepTaskDone_IsCheckedChanged"
+                             IsCheckedChanged="StepTaskDone_IsCheckedChanged"
                              IsChecked="{Binding StepIsDone}"
                              OutlineColor="Blue"
                              Margin="0,0,0,0"

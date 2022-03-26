@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
-using IntelliAbb.Xamarin.Controls;
 using SQLite;
-using taskScheduler.CustomInterfaceRepresentation;
+
 
 namespace taskScheduler.Models
 {
@@ -14,9 +13,7 @@ namespace taskScheduler.Models
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Step { get; set; }
-        public bool IsCompleted { get; set; }
-        public bool StepIsDone { get; set; }
+        public List<StepTask> Step { get; set; }
         public string Description { get; set; }
         public string Importance { get; set; }
         public string TaskCreatedDate { get; set; }
@@ -25,11 +22,4 @@ namespace taskScheduler.Models
         public DateTime DueDate { get; set; }
         public DateTime Created { get; set; }
     }
-
-    public class DObject
-    {
-        public XEditor step { get; set; }
-        public Checkbox stepDone { get; set; }
-    }
-
 }

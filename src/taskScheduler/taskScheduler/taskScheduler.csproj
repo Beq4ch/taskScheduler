@@ -11,20 +11,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Data\TaskDatabase.db" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ApplicationDefinition Include="Data\TaskDatabase.db" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Data\TaskDatabase.db" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="IntelliAbb.Xamarin.Controls" Version="1.0.148" />
     <PackageReference Include="Plugin.XCalendar" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="6.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.23" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
