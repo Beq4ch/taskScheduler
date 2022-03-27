@@ -120,7 +120,7 @@
                                                          x:Name="taskRepeatButton"
                                                          Grid.Row="2"
                                                          Style="{StaticResource buttonStyleInAddingTask}"
-                                                         ImageSource="calendar.png"/>
+                                                         ImageSource="replay.png"/>
                         </Grid>
                     </StackLayout>
                 </Frame>

@@ -23,9 +23,7 @@ namespace taskScheduler.Views
     public partial class TasksListView : ContentPage
     {
         public ObservableCollection<TaskFilds> TasksList { get; set; }
-
         public IEnumerable<TaskFilds> Selectdd { get; set; }
-
         public AsyncCommand RefreshCommand { get; }
 
         public static DateTime Date = new DateTime();
@@ -35,16 +33,8 @@ namespace taskScheduler.Views
         DateTime Yesterday = new DateTime();
         public TasksListView()
         {
-            
             InitializeComponent();
-            Date = DateTime.Today;
-            Tomorrow = Date.AddDays(1);
-            DayAfterTomorrow = Date.AddDays(2);
-            Yesterday = Date.AddDays(-1);
-            ButYesterday.Text = $"{Yesterday.ToString("dd.MM.yyyy")}\n{Yesterday.ToString("ddd")}\nВчера";
-            ButToday.Text = $"{Date.ToString("dd.MM.yyyy")}\n{Date.ToString("ddd")}\nСегодня";
-            ButTomorrow.Text = $"{Tomorrow.ToString("dd.MM.yyyy")}\n{Tomorrow.ToString("ddd")}\nЗавтра";
-            ButAfterTomorrow.Text = $"{DayAfterTomorrow.ToString("dd.MM.yyyy")}\n{DayAfterTomorrow.ToString("ddd")}\nПослезавтра";
+
             RefreshCommand = new AsyncCommand(Refresh);
         } 
          
@@ -54,31 +44,36 @@ namespace taskScheduler.Views
             {
                 date = DateTime.Today;
                 check = false;
-                CurDate.Text = date.ToString("dd.MM.yyyy");
+                curDate.Text = date.ToString("dd.MM.yyyy");
             }
             else
             {
                 listView.ItemsSource = await App.TasksDB.db.QueryAsync<TaskFilds>(
                "SELECT * FROM Tasks WHERE TaskCreatedDate = ?", date.ToString("dd.MM.yyyy"));
-                CurDate.Text = date.ToString("dd.MM.yyyy");
+                curDate.Text = date.ToString("dd.MM.yyyy");
             }
                 if (date < DateTime.Today)
-                {
-                Plus.IsEnabled = false;
-                }
+                    Plus.IsEnabled = false;
                 else
-                {
-                Plus.IsEnabled = true;
-                }
+                    Plus.IsEnabled = true;
          }
         protected override async void OnAppearing()
         {
+            Date = DateTime.Today;
+            Tomorrow = Date.AddDays(1);
+            DayAfterTomorrow = Date.AddDays(2);
+            Yesterday = Date.AddDays(-1);
+            ButYesterday.Text = $"{Yesterday.ToString("dd.MM.yyyy")}\n{Yesterday.ToString("ddd")}\nВчера";
+            ButToday.Text = $"{Date.ToString("dd.MM.yyyy")}\n{Date.ToString("ddd")}\nСегодня";
+            ButTomorrow.Text = $"{Tomorrow.ToString("dd.MM.yyyy")}\n{Tomorrow.ToString("ddd")}\nЗавтра";
+            ButAfterTomorrow.Text = $"{DayAfterTomorrow.ToString("dd.MM.yyyy")}\n{DayAfterTomorrow.ToString("ddd")}\nПослезавтра";
+
             BindingContext = new TaskFilds();
 
-            listView.ItemsSource = await App.TasksDB.GetTasksAsync();
+            listView.ItemsSource = await App.TasksDB.db.QueryAsync<TaskFilds>(
+               "SELECT * FROM Tasks WHERE TaskCreatedDate = ?", DateTime.Now.ToString("dd.MM.yyyy"));
+
             SearchByDate(Date);
-            
-           
 
             base.OnAppearing();
         }
@@ -122,21 +117,21 @@ namespace taskScheduler.Views
             IsBusy = false;
         }
 
-        private async void Button_Clicked_ToDay(object sender, EventArgs e)
+        private void Button_Clicked_ToDay(object sender, EventArgs e)
         {
             Date = DateTime.Today;
             SearchByDate(Date);
         }
-        private async void Button_Clicked_Tomorrow(object sender, EventArgs e)
+        private void Button_Clicked_Tomorrow(object sender, EventArgs e)
         {
             Date = Tomorrow;
             SearchByDate(Tomorrow);
         }
-        private async void Button_Clicked_Afet_Tomorrow(object sender, EventArgs e)
+        private void Button_Clicked_Afet_Tomorrow(object sender, EventArgs e)
         {
             Date = DayAfterTomorrow;
             SearchByDate(DayAfterTomorrow);
-        }private async void Button_Clicked_Yesterday(object sender, EventArgs e)
+        }private void Button_Clicked_Yesterday(object sender, EventArgs e)
         {
             Date = Yesterday;
             SearchByDate(Yesterday);

@@ -83,8 +83,7 @@ namespace taskScheduler.Views
         {
             TaskFilds task = (TaskFilds)BindingContext;
 
-            /*task.Created = DateTime.Now;*/
-            task.TaskCreatedDate = TasksListView.Date.ToString("dd.MM.yyyy");
+            /*task.TaskCreatedDate = TasksListView.Date.ToString("dd.MM.yyyy");*/
 
             if (!string.IsNullOrWhiteSpace(task.Name))
                 await App.TasksDB.SaveTaskAsync(task);
