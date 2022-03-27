@@ -24,7 +24,6 @@ namespace taskScheduler.Views
 
             try
             {
-             
                 TasksListView.Date = Calendarobj.SelectedDates.Last();
                 await Navigation.PopAsync();
             }

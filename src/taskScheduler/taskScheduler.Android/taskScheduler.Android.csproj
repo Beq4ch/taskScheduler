@@ -129,5 +129,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\calendar_25px.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\replay.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

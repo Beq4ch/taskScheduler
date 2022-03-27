@@ -28,7 +28,7 @@ namespace taskScheduler.Droid.CustomInterfaceRepresentation
             base.OnElementChanged(e);
             var button = this.Control;
             button.SetAllCaps(false);
-            button.TextAlignment = Android.Views.TextAlignment.TextStart;
+            button.Gravity = GravityFlags.ClipHorizontal;
         }
     }
 }

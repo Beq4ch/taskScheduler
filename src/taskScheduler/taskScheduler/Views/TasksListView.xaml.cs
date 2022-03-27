@@ -35,6 +35,15 @@ namespace taskScheduler.Views
         {
             InitializeComponent();
 
+            Date = DateTime.Today;
+            Tomorrow = Date.AddDays(1);
+            DayAfterTomorrow = Date.AddDays(2);
+            Yesterday = Date.AddDays(-1);
+            ButYesterday.Text = $"{Yesterday.ToString("dd.MM.yyyy")}\n{Yesterday.ToString("ddd")}\nВчера";
+            ButToday.Text = $"{Date.ToString("dd.MM.yyyy")}\n{Date.ToString("ddd")}\nСегодня";
+            ButTomorrow.Text = $"{Tomorrow.ToString("dd.MM.yyyy")}\n{Tomorrow.ToString("ddd")}\nЗавтра";
+            ButAfterTomorrow.Text = $"{DayAfterTomorrow.ToString("dd.MM.yyyy")}\n{DayAfterTomorrow.ToString("ddd")}\nПослезавтра";
+
             RefreshCommand = new AsyncCommand(Refresh);
         } 
          
@@ -59,14 +68,7 @@ namespace taskScheduler.Views
          }
         protected override async void OnAppearing()
         {
-            Date = DateTime.Today;
-            Tomorrow = Date.AddDays(1);
-            DayAfterTomorrow = Date.AddDays(2);
-            Yesterday = Date.AddDays(-1);
-            ButYesterday.Text = $"{Yesterday.ToString("dd.MM.yyyy")}\n{Yesterday.ToString("ddd")}\nВчера";
-            ButToday.Text = $"{Date.ToString("dd.MM.yyyy")}\n{Date.ToString("ddd")}\nСегодня";
-            ButTomorrow.Text = $"{Tomorrow.ToString("dd.MM.yyyy")}\n{Tomorrow.ToString("ddd")}\nЗавтра";
-            ButAfterTomorrow.Text = $"{DayAfterTomorrow.ToString("dd.MM.yyyy")}\n{DayAfterTomorrow.ToString("ddd")}\nПослезавтра";
+            
 
             BindingContext = new TaskFilds();
 
