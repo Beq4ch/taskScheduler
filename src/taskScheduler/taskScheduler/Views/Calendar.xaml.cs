@@ -21,12 +21,11 @@ namespace taskScheduler.Views
         }
         private async void Calendarobj_DateSelectionChanged(object sender, XCalendar.Models.DateSelectionChangedEventArgs e)
         {
-            TasksListView curDate = new TasksListView();
-            TasksListView listsView = new TasksListView();
+
             try
             {
-                curDate.CurDate.Text = Calendarobj.SelectedDates.Last().ToString("dd.MM.yyyy");
-                listsView.listView.ItemsSource = await App.TasksDB.GetTasksAsync();
+             
+                TasksListView.Date = Calendarobj.SelectedDates.Last();
                 await Navigation.PopAsync();
             }
             catch { }
