@@ -30,9 +30,6 @@ namespace taskScheduler.Views
 
             BindingContext = new TaskFilds();
 
-
-
-
         }
         private async void LoadTask(string value)
         {
@@ -82,8 +79,8 @@ namespace taskScheduler.Views
         {
             TaskFilds task = (TaskFilds)BindingContext;
 
-            task.Created = DateTime.Now;
-            task.TaskCreatedDate = TasksListView.Date.ToString("dd.MM.yyyy");
+            /*task.Created = DateTime.Now;*/
+            /*task.TaskCreatedDate = TasksListView.Date.ToString("dd.MM.yyyy");*/
 
             if (!string.IsNullOrWhiteSpace(task.Name))
                 await App.TasksDB.SaveTaskAsync(task);
@@ -118,7 +115,7 @@ namespace taskScheduler.Views
                 
         }
 
-        public async void AddStep_Completed(object sender, EventArgs e)
+        /*public async void AddStep_Completed(object sender, EventArgs e)
         {
             rowsCount++;
 
@@ -130,59 +127,42 @@ namespace taskScheduler.Views
             TaskFilds steps = new TaskFilds();
 
             Binding bindingStepsDone = new Binding { Source = steps, Path = "StepIsDone" };
-
-            /*Models.XEditorUI stepD = new Models.XEditorUI();
-            stepD.StepDone.OutlineColor = Color.Blue;
-            stepD.StepDone.Margin = new Thickness(0);
-            stepD.StepDone.FillColor = Color.Blue;
-            stepD.StepDone.CheckColor = Color.White;
-            stepD.StepDone.Shape = Shape.Circle;*/
-
-            /*stepD.StepDone.IsChecked = Convert.ToBoolean(bindingStepsDone);*/
-
-            /*Checkbox StepDone = new Checkbox()
+            Checkbox StepDone = new Checkbox()
             {
                 OutlineColor = Color.Blue,
                 Margin = 0,
                 FillColor = Color.Blue,
                 CheckColor = Color.White,
-                Shape = Shape.Circle
+                Shape = Shape.Circle,
                 IsChecked = Convert.ToBoolean(bindingStepsDone)
-            };*/
-
-            /*StepDone.SetBinding(Checkbox.IsCheckedProperty, bindingStepsDone);*/
+            };
+            StepDone.SetBinding(Checkbox.IsCheckedProperty, bindingStepsDone);
 
             Binding bindingSteps = new Binding { Source = steps, Path = "Step" };
-
-            /*Models.XEditorUI stepObj = new Models.XEditorUI();*/
-
-            /*stepObj.Step.Placeholder = "Добавить шаг";
-            stepObj.Step.MaxLength = 256;*/
-
-            /*XEditor Step = new XEditor
+            XEditor Step = new XEditor
             {
                 Placeholder = "Добавить шаг",
                 MaxLength = 256,
                 Margin = 0,
-                Text = "Hi",
-                AutoSize = Xamarin.Forms.EditorAutoSizeOption.TextChanges
-            };*/
+                Text = Convert.ToString(bindingSteps),
+                AutoSize = EditorAutoSizeOption.TextChanges
+            };
+            Step.SetBinding(XEditor.TextProperty, bindingSteps);
+             *//*stepTaskDone_IsCheckedChanged(StepDone, (CheckedChangedEventArgs)EventArgs.Empty);*//*
 
-           /* stepObj.Step.SetBinding(XEditor.TextProperty, bindingSteps);
-            *//*stepTaskDone_IsCheckedChanged(StepDone, (CheckedChangedEventArgs)EventArgs.Empty);*//*
 
+             gridStep.Children.Add(StepDone, 0, rowsCount);
 
-            gridStep.Children.Add(stepD.StepDone, 0, rowsCount);
-
-            gridStep.Children.Add(stepObj.Step, 1, rowsCount);*/
+             gridStep.Children.Add(Step, 1, rowsCount);
 
 
             TaskFilds task = (TaskFilds)BindingContext;
-
-            task.Created = DateTime.Now;        
-
             if (!string.IsNullOrWhiteSpace(task.Name))
                 await App.TasksDB.SaveTaskAsync(task);
+
+            StepTask stepTask = (StepTask)BindingContext;
+            if (!string.IsNullOrWhiteSpace(stepTask.Step))
+                await App.TasksDB.SaveStepTaskAsync(stepTa);
 
         }
 
@@ -193,13 +173,11 @@ namespace taskScheduler.Views
                 stepTask.Effects.Add(strike);
             else
                 stepTask.Effects.Clear();
-        }
+        }*/
 
         private async void SaveTaskName_Completed(object sender, EventArgs e)
         {
             TaskFilds task = (TaskFilds)BindingContext;
-
-            task.Created = DateTime.Now;
 
             if (!string.IsNullOrWhiteSpace(task.Name))
                 await App.TasksDB.SaveTaskAsync(task);

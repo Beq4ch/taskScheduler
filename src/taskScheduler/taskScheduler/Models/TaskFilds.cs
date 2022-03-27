@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using SQLite;
+using SQLiteNetExtensions.Attributes;
 
 
 namespace taskScheduler.Models
@@ -13,7 +14,9 @@ namespace taskScheduler.Models
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         public string Name { get; set; }
-        public List<StepTask> Step { get; set; }
+
+        /*[OneToMany(CascadeOperations = CascadeOperation.All)]
+        public List<StepTask> Step { get; set; }*/
         public string Description { get; set; }
         public string Importance { get; set; }
         public string TaskCreatedDate { get; set; }

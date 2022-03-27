@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:xc="clr-namespace:XCalendar;assembly=XCalendar"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:xc="clr-namespace:XCalendar;assembly=XCalendar"
              x:Class="taskScheduler.Views.TasksListView"
              Title="Задачи">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="CurDate"/>
+        <ToolbarItem x:Name="CurDate"
+                     x:FieldModifier="public"/>
         <ToolbarItem IconImageSource="plus_math.png"
                      Clicked="AddButtonClick_Clicked"/>
     </ContentPage.ToolbarItems>
@@ -18,94 +18,94 @@
         </Grid.RowDefinitions>
 
         <StackLayout>
-            <xc:CalendarView HorizontalOptions="Fill" 
-                             VerticalOptions="Fill" 
-                             IsVisible="false" 
-                             x:Name="Calendarobj" 
-                             DateSelectionChanged="Calendarobj_DateSelectionChanged" 
-                             SelectionType="Single"
-                             />
             <ListView IsPullToRefreshEnabled="True"
-                  CachingStrategy="RecycleElement"
-                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                  RefreshCommand="{Binding RefreshCommand}"
-                  ItemsSource="{Binding TasksList}"
-                  RefreshControlColor="Red"
-                  SeparatorVisibility="None"
-                  HasUnevenRows="True"
-                  x:Name="listView"
-                  SelectionMode="Single"
-                  ItemTapped="OnSelectionChanged"
-                  Grid.Row="0">
-            
-            <ListView.ItemTemplate>
+                      x:FieldModifier="public"
+                      CachingStrategy="RecycleElement"
+                      IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      ItemsSource="{Binding TasksList}"
+                      RefreshControlColor="Red"
+                      SeparatorVisibility="None"
+                      HasUnevenRows="True"
+                      x:Name="listView"
+                      SelectionMode="Single"
+                      ItemTapped="OnSelectionChanged"
+                      Grid.Row="0">
+                <ListView.ItemTemplate>
                 <DataTemplate x:Name="dataTemplateListView">
                     <ViewCell>
                         <ViewCell.ContextActions>
                             <MenuItem Clicked="DeleteTask_Clicked"
-                                      IconImageSource="delete.png"
-                                      />
+                                      IconImageSource="delete.png"/>
                         </ViewCell.ContextActions>
-                        <Grid>
-                        
-                        <StackLayout x:Name="stack1">
-                                <Grid Margin="0,5,5,0"
-                                      ColumnDefinitions="0.5*,0.3*"
-                                      RowDefinitions="25,20"
-                                      x:Name="grid1">
+                            <Grid>
+                                <StackLayout x:Name="stack1">
+                                    <Grid Margin="0,5,5,0"
+                                          ColumnDefinitions="0.5*,0.3*"
+                                          RowDefinitions="25,20"
+                                          x:Name="grid1">
 
                                         <Label Text="{Binding Name}"
-                                       x:Name="taskNameInList"
-                                       FontSize="Medium"
-                                       Padding="5,0,0,0"
-                                       TextColor="Black"
-                                       Grid.Row="0"
-                                       Grid.Column="0"/>
+                                               x:Name="taskNameInList"
+                                               FontSize="Medium"
+                                               Padding="5,0,0,0"
+                                               TextColor="Black"
+                                               Grid.Row="0"
+                                               Grid.Column="0"/>
 
                                         <Label Text="{Binding Description}"
-                                       x:Name="desc"
-                                       TextColor="Gray"
-                                       Padding="10,0,0,0"
-                                       FontSize="Small"
-                                       Grid.Row="1"
-                                       Grid.Column="0"/>
+                                               x:Name="desc"
+                                               TextColor="Gray"
+                                               Padding="10,0,0,0"
+                                               FontSize="Small"
+                                               Grid.Row="1"
+                                               Grid.Column="0"/>
 
                                         <Label Text="{Binding TaskCreatedDate}"
-                                       TextColor="Silver"
-                                       Padding="0,0,0,5"
-                                       FontSize="Small"
-                                       Grid.Row="0"
-                                       Grid.Column="1"/>
+                                               TextColor="Silver"
+                                               Padding="0,0,0,5"
+                                               FontSize="Small"
+                                               Grid.Row="0"
+                                               Grid.Column="1"/>
                                     </Grid>
                                 </StackLayout>
-
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
-        <StackLayout VerticalOptions="End" Background="#045adb">
-                <Grid>
-                    <Button x:Name="ButCalendar"
-                    HorizontalOptions="Start"
-                    Clicked="Button_Clicked_Calendar"
-                    Text="Calendar"
-                    CornerRadius="25"/>
-                    <Button x:Name="ButToday"
-                    HorizontalOptions="Center"
-                    Clicked="Button_Clicked"
-                    CornerRadius="25"/>
-                    <Button x:Name="ButTomorrow"
-                    HorizontalOptions="End" 
-                    Clicked="Button_Clicked_Tomorrow"
-                    CornerRadius="25"/>
+        <StackLayout VerticalOptions="End">
+            <Grid ColumnDefinitions="0.5*,0.5*,0.5*">
+                <Button x:Name="ButCalendar"
+                        Grid.Column="0"
+                        WidthRequest="75"
+                        HeightRequest="50"
+                        HorizontalOptions="Start"
+                        Clicked="Button_Clicked_Calendar"
+                        Text="Calendar"
+                        FontAttributes="Bold"
+                        FontSize="10"
+                        CornerRadius="65"/>
+                <Button x:Name="ButToday"
+                        Grid.Column="1"
+                        WidthRequest="75"
+                        HeightRequest="75"
+                        FontAttributes="Bold"
+                        FontSize="10"
+                        HorizontalOptions="Center"
+                        Clicked="Button_Clicked_ToDay"
+                        CornerRadius="65"/>
+                <Button x:Name="ButTomorrow"
+                        WidthRequest="75"
+                        HeightRequest="50"
+                        Grid.Column="2"
+                        FontAttributes="Bold"
+                        FontSize="9"
+                        HorizontalOptions="End" 
+                        Clicked="Button_Clicked_Tomorrow"
+                        CornerRadius="65"/>
             </Grid>
-                <Label x:Name="LabelDate"
-                   Text="Test"
-                   TextColor="Black"
-                   FontSize="Large"/>
-           
         </StackLayout>
         <!--<CollectionView x:Name="collectionView"
                         SelectionMode="Single"

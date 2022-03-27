@@ -12,7 +12,7 @@ namespace taskScheduler
     public partial class App : Application
     {
         public const string DATABASE_NAME = "TasksDatabase.db3";
-        public static TasksDB tasksDB;
+        static TasksDB tasksDB;
 
         public static TasksDB TasksDB
         {

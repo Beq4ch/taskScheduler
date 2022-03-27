@@ -35,7 +35,8 @@ namespace taskScheduler.Views
             InitializeComponent();
 
             Date = DateTime.Now;
-            ButToday.Text += $"{Date.ToString("dd.MM.yyyy")}\n{Date.ToString("ddd")}.\nСегодня";    
+            ButToday.Text += $"{Date.ToString("dd.MM.yyyy")}\n{Date.ToString("ddd")}.\nСегодня";
+            ButTomorrow.Text += $"{Date.AddDays(1).ToString("dd.MM.yyyy")}\n{Date.AddDays(1).ToString("ddd")}.\nЗавтра";
 
             RefreshCommand = new AsyncCommand(Refresh);
         }
@@ -84,7 +85,7 @@ namespace taskScheduler.Views
 
             TasksList.Clear();
 
-            var tasks = await App.TasksDB.GetTasksAsync();
+            /*listView.ItemsSource = await App.TasksDB.GetTasksAsync();*/
 
             IsBusy = false;
         }
@@ -94,35 +95,15 @@ namespace taskScheduler.Views
 
             listView.ItemsSource = await App.TasksDB.db.QueryAsync<TaskFilds>(
                 "SELECT * FROM Tasks WHERE TaskCreatedDate = ?", Date.ToString("dd.MM.yyyy"));
-                
-            
         }
         private async void Button_Clicked_Tomorrow(object sender, EventArgs e)
-        {                        
-          listView.ItemsSource = await App.TasksDB.db.QueryAsync<TaskFilds>(
-                "SELECT * FROM Tasks WHERE TaskCreatedDate = ?", Date.AddDays(1).ToString("dd.MM.yyyy"));
-           
-
-        private async void Button_Clicked_Tommorow(object sender, EventArgs e)
         {
-            DateTime date = DateTime.Now;
-            date = date.AddDays(+1);
             listView.ItemsSource = await App.TasksDB.db.QueryAsync<TaskFilds>(
-                  "SELECT * FROM Tasks WHERE TaskCreatedDate = ?", date.ToString("dd.MM.yyyy"));
+                  "SELECT * FROM Tasks WHERE TaskCreatedDate = ?", Date.AddDays(1).ToString("dd.MM.yyyy"));
         }
         private async void Button_Clicked_Calendar(object sender, EventArgs e)
         {
-            Calendarobj.IsVisible = true;
-            listView.IsVisible = false;
-
-
-        }
-
-        private void Calendarobj_DateSelectionChanged(object sender, XCalendar.Models.DateSelectionChangedEventArgs e)
-        {
-           CurDate.Text = Calendarobj.SelectedDates.Last().ToString("dd.MM.yyyy");
-            Calendarobj.IsVisible = false;
-            listView.IsVisible = true;
+            await Navigation.PushAsync(new Calendar());
         }
     }
 }
