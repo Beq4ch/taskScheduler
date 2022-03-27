@@ -29,24 +29,56 @@ namespace taskScheduler.Views
         public AsyncCommand RefreshCommand { get; }
 
         public static DateTime Date = new DateTime();
+        public static bool check = true;
+        DateTime Tomorrow = new DateTime();
+        DateTime DayAfterTomorrow = new DateTime();
+        DateTime Yesterday = new DateTime();
         public TasksListView()
         {
             
             InitializeComponent();
-
-            Date = DateTime.Now;
-            ButToday.Text += $"{Date.ToString("dd.MM.yyyy")}\n{Date.ToString("ddd")}.\nСегодня";
-            ButTomorrow.Text += $"{Date.AddDays(1).ToString("dd.MM.yyyy")}\n{Date.AddDays(1).ToString("ddd")}.\nЗавтра";
-
+            Date = DateTime.Today;
+            Tomorrow = Date.AddDays(1);
+            DayAfterTomorrow = Date.AddDays(2);
+            Yesterday = Date.AddDays(-1);
+            ButYesterday.Text = $"{Yesterday.ToString("dd.MM.yyyy")}\n{Yesterday.ToString("ddd")}\nВчера";
+            ButToday.Text = $"{Date.ToString("dd.MM.yyyy")}\n{Date.ToString("ddd")}\nСегодня";
+            ButTomorrow.Text = $"{Tomorrow.ToString("dd.MM.yyyy")}\n{Tomorrow.ToString("ddd")}\nЗавтра";
+            ButAfterTomorrow.Text = $"{DayAfterTomorrow.ToString("dd.MM.yyyy")}\n{DayAfterTomorrow.ToString("ddd")}\nПослезавтра";
             RefreshCommand = new AsyncCommand(Refresh);
-        }
-        
-        
+        } 
+         
+         async void SearchByDate (DateTime date)
+         {
+            if (check)
+            {
+                date = DateTime.Today;
+                check = false;
+                CurDate.Text = date.ToString("dd.MM.yyyy");
+            }
+            else
+            {
+                listView.ItemsSource = await App.TasksDB.db.QueryAsync<TaskFilds>(
+               "SELECT * FROM Tasks WHERE TaskCreatedDate = ?", date.ToString("dd.MM.yyyy"));
+                CurDate.Text = date.ToString("dd.MM.yyyy");
+            }
+                if (date < DateTime.Today)
+                {
+                Plus.IsEnabled = false;
+                }
+                else
+                {
+                Plus.IsEnabled = true;
+                }
+         }
         protected override async void OnAppearing()
         {
             BindingContext = new TaskFilds();
 
             listView.ItemsSource = await App.TasksDB.GetTasksAsync();
+            SearchByDate(Date);
+            
+           
 
             base.OnAppearing();
         }
@@ -92,14 +124,22 @@ namespace taskScheduler.Views
 
         private async void Button_Clicked_ToDay(object sender, EventArgs e)
         {
-
-            listView.ItemsSource = await App.TasksDB.db.QueryAsync<TaskFilds>(
-                "SELECT * FROM Tasks WHERE TaskCreatedDate = ?", Date.ToString("dd.MM.yyyy"));
+            Date = DateTime.Today;
+            SearchByDate(Date);
         }
         private async void Button_Clicked_Tomorrow(object sender, EventArgs e)
         {
-            listView.ItemsSource = await App.TasksDB.db.QueryAsync<TaskFilds>(
-                  "SELECT * FROM Tasks WHERE TaskCreatedDate = ?", Date.AddDays(1).ToString("dd.MM.yyyy"));
+            Date = Tomorrow;
+            SearchByDate(Tomorrow);
+        }
+        private async void Button_Clicked_Afet_Tomorrow(object sender, EventArgs e)
+        {
+            Date = DayAfterTomorrow;
+            SearchByDate(DayAfterTomorrow);
+        }private async void Button_Clicked_Yesterday(object sender, EventArgs e)
+        {
+            Date = Yesterday;
+            SearchByDate(Yesterday);
         }
         private async void Button_Clicked_Calendar(object sender, EventArgs e)
         {

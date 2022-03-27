@@ -5,9 +5,10 @@
              Title="Задачи">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="CurDate"
+        <ToolbarItem x:Name="CurDate" 
                      x:FieldModifier="public"/>
         <ToolbarItem IconImageSource="plus_math.png"
+                     x:Name="Plus"
                      Clicked="AddButtonClick_Clicked"/>
     </ContentPage.ToolbarItems>
    
@@ -76,34 +77,47 @@
             </ListView>
         </StackLayout>
         <StackLayout VerticalOptions="End">
-            <Grid ColumnDefinitions="0.5*,0.5*,0.5*">
+            <Grid ColumnDefinitions="0.5*,0.5*,0.5*,0.5*,0.5*">
                 <Button x:Name="ButCalendar"
                         Grid.Column="0"
-                        WidthRequest="75"
-                        HeightRequest="50"
-                        HorizontalOptions="Start"
+                        WidthRequest="65"
+                        HeightRequest="75"
                         Clicked="Button_Clicked_Calendar"
                         Text="Calendar"
                         FontAttributes="Bold"
-                        FontSize="10"
+                        FontSize="9"
                         CornerRadius="65"/>
-                <Button x:Name="ButToday"
+                <Button x:Name="ButYesterday"
                         Grid.Column="1"
-                        WidthRequest="75"
+                        WidthRequest="65"
                         HeightRequest="75"
                         FontAttributes="Bold"
-                        FontSize="10"
-                        HorizontalOptions="Center"
+                        FontSize="9"   
+                        Clicked="Button_Clicked_Yesterday"
+                        CornerRadius="65"/>
+                <Button x:Name="ButToday"
+                        Grid.Column="2"
+                        WidthRequest="65"
+                        HeightRequest="75"
+                        FontAttributes="Bold"
+                        FontSize="9"   
                         Clicked="Button_Clicked_ToDay"
                         CornerRadius="65"/>
                 <Button x:Name="ButTomorrow"
-                        WidthRequest="75"
-                        HeightRequest="50"
-                        Grid.Column="2"
+                        WidthRequest="65"
+                        HeightRequest="75"
+                        Grid.Column="3"
+                        FontAttributes="Bold"
+                        FontSize="9"                      
+                        Clicked="Button_Clicked_Tomorrow"
+                        CornerRadius="65"/>       
+                <Button x:Name="ButAfterTomorrow"
+                        WidthRequest="65"
+                        HeightRequest="75"
+                        Grid.Column="4"
                         FontAttributes="Bold"
                         FontSize="9"
-                        HorizontalOptions="End" 
-                        Clicked="Button_Clicked_Tomorrow"
+                        Clicked="Button_Clicked_Afet_Tomorrow"
                         CornerRadius="65"/>
             </Grid>
         </StackLayout>
