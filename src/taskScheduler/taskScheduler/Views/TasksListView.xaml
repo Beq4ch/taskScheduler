@@ -39,14 +39,12 @@
                                       IconImageSource="delete.png"/>
                         </ViewCell.ContextActions>
                             <Grid>
-                                <StackLayout x:Name="stack1">
+                                <StackLayout>
                                     <Grid Margin="0,5,5,0"
-                                          ColumnDefinitions="0.5*,0.3*"
-                                          RowDefinitions="25,20"
-                                          x:Name="grid1">
+                                          ColumnDefinitions="0.8*,0.2*"
+                                          RowDefinitions="25,20">
 
                                         <Label Text="{Binding Name}"
-                                               x:Name="taskNameInList"
                                                FontSize="Medium"
                                                Padding="5,0,0,0"
                                                TextColor="Black"
@@ -54,7 +52,6 @@
                                                Grid.Column="0"/>
 
                                         <Label Text="{Binding Description}"
-                                               x:Name="desc"
                                                TextColor="Gray"
                                                Padding="10,0,0,0"
                                                FontSize="Small"
@@ -107,55 +104,5 @@
                         CornerRadius="65"/>
             </Grid>
         </StackLayout>
-        <!--<CollectionView x:Name="collectionView"
-                        SelectionMode="Single"
-                        SelectionChanged="OnSelectionChanged"
-                        Grid.Row="0">
-
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical"/>
-            </CollectionView.ItemsLayout>
-
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:Name="dataTemplate">
-                    <ViewCell>
-                        <ViewCell.ContextActions>
-                            <MenuItem Clicked="DeleteTask_Clicked"
-                                      IconImageSource="delete.png"/>
-                        </ViewCell.ContextActions>
-                            <StackLayout x:Name="stack1">
-                            <Grid Margin="0,5,5,0"
-                                      ColumnDefinitions="0.5*,0.3*"
-                                      RowDefinitions="25,20"
-                                      x:Name="grid1">
-
-                                <Label Text="{Binding Name}"
-                                       x:Name="taskNameInList"
-                                       FontSize="Medium"
-                                       Padding="5,0,0,0"
-                                       TextColor="Black"
-                                       Grid.Row="0"
-                                       Grid.Column="0"/>
-
-                                <Label Text="{Binding Description}"
-                                       x:Name="desc"
-                                       TextColor="Gray"
-                                       Padding="10,0,0,0"
-                                       FontSize="Small"
-                                       Grid.Row="1"
-                                       Grid.Column="0"/>
-
-                                <Label Text="{Binding Created}"
-                                       TextColor="Silver"
-                                       Padding="0,0,0,5"
-                                       FontSize="Small"
-                                       Grid.Row="0"
-                                       Grid.Column="1"/>
-                            </Grid>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>-->
     </Grid>
 </ContentPage>

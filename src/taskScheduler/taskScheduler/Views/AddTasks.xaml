@@ -3,13 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:taskscheduler="clr-namespace:taskScheduler.Models"
              xmlns:local ="clr-namespace:taskScheduler" 
-             xmlns:local1="clr-namespace:taskScheduler.CustomInterfaceRepresentation"
+             xmlns:customElementEditor="clr-namespace:taskScheduler.CustomInterfaceRepresentation"
+             xmlns:customElementButton="clr-namespace:taskScheduler.Views.RendererAndEffects"
              xmlns:ia="clr-namespace:IntelliAbb.Xamarin.Controls;assembly=IntelliAbb.Xamarin.Controls"
-             xmlns:effects="clr-namespace:taskScheduler.Views.RendererAndEffects"
              x:FieldModifier="public"
              x:Class="taskScheduler.Views.AddTasks"
              x:Name="addTasksLayout"
              Title="Создание задачи">
+    
+    <ContentPage.Resources>
+        <Style TargetType="customElementButton:XButton"
+               x:Key="buttonStyleInAddingTask">
+            <Setter Property="TextTransform" Value="Default"/>
+            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+        </Style>
+    </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="delete.png"
@@ -20,45 +31,47 @@
                      x:Name="saveButton"/>
     </ContentPage.ToolbarItems>
 
+    
     <ContentPage.Content>
         <ScrollView VerticalOptions="FillAndExpand"
                     x:Name="scrollView"
                     VerticalScrollBarVisibility="Always">
-        <Grid RowDefinitions="auto, auto">
-            <Frame BorderColor="White"
-                   CornerRadius="20"
-                   Padding="0"
-                   Grid.Row="0"
-                   Margin="0,0,0,5">
-        <StackLayout Margin="10">
-            <Grid RowDefinitions="auto, auto"
-                  ColumnDefinitions="auto, auto, auto"
-                  x:Name="taskGrid"
-                  Margin="0,0,0,-10">
+            <Grid RowDefinitions="auto, auto, auto">
+                <Frame HasShadow="True"
+                       CornerRadius="20"
+                       Padding="0"
+                       Grid.Row="0"
+                       Margin="0,0,0,5">
+                    <StackLayout Margin="10">
+                        <Grid RowDefinitions="auto"
+                              ColumnDefinitions="auto"
+                              Grid.Row="0"
+                              x:Name="taskGrid"
+                              Margin="0,0,0,-10">
 
-                <ia:Checkbox x:Name="taskDone"
-                             IsCheckedChanged="TaskDone_CheckedChanged"
-                             IsChecked="{Binding IsCompleted}"
-                             OutlineColor="Blue"
-                             FillColor="Blue"
-                             CheckColor="White"
-                             Margin="0,10,0,0"
-                             VerticalOptions="StartAndExpand"
-                             Shape="Circle"
-                             Grid.Column="0"
-                             Grid.Row="0"/>
+                            <ia:Checkbox x:Name="taskDone"
+                                         IsCheckedChanged="TaskDone_CheckedChanged"
+                                         IsChecked="{Binding IsCompleted}"
+                                         OutlineColor="Blue"
+                                         FillColor="Blue"
+                                         CheckColor="White"
+                                         Margin="0,10,0,0"
+                                         VerticalOptions="StartAndExpand"
+                                         Shape="Circle"
+                                         Grid.Column="0"
+                                         Grid.Row="0"/>
 
-                <local1:XEditor Placeholder="Добвить задачу"
-                                MaxLength="256"
-                                x:Name="taskName"
-                                Grid.Column="1"
-                                Grid.Row="0"
-                                Text="{Binding Name}"
-                                AutoSize="TextChanges"
-                                Margin="0,0,0,0"
-                                FontAttributes="Bold"/>
-            </Grid>
-            <!--<Grid RowDefinitions="auto"
+                            <customElementEditor:XEditor Placeholder="Добвить задачу"
+                                                         MaxLength="256"
+                                                         x:Name="taskName"
+                                                         Grid.Column="1"
+                                                         Grid.Row="0"
+                                                         Text="{Binding Name}"
+                                                         AutoSize="TextChanges"
+                                                         Margin="0,0,0,0"
+                                                         FontAttributes="Bold"/>
+                        </Grid>
+                        <!--<Grid RowDefinitions="auto"
                   ColumnDefinitions="auto"
                   Margin="15,0,0,0"
                   x:Name="gridStep">
@@ -83,22 +96,69 @@
                                 AutoSize="TextChanges"
                                 Completed="AddStep_Completed"/>
             </Grid>-->
-        </StackLayout>
-            </Frame>
-            <Frame BorderColor="White"
-                   Padding="0,45,0,0"
-                   Grid.Row="1"
-                   Margin="5,0,5,15"
-                   CornerRadius="20">
-            <StackLayout>
-                        <Grid Grid.Row="1"
-                              RowDefinitions="auto"
-                              ColumnDefinitions="auto">
-                            
+                    </StackLayout>
+                </Frame>
+                
+                <Frame HasShadow="True"
+                       Padding="0,0,0,0"
+                       Grid.Row="1"
+                       Margin="5,0,5,15"
+                       CornerRadius="20">
+                    <StackLayout>
+                        <Grid RowDefinitions="auto,auto,auto">
+                            <customElementButton:XButton Text="Дата и время начала" 
+                                                         x:Name="taskStartButton"
+                                                         Grid.Row="0"
+                                                         Style="{StaticResource buttonStyleInAddingTask}"
+                                                         ImageSource="calendar.png"/>
+                            <customElementButton:XButton Text="Срок выполнения"
+                                                         x:Name="taskCompletionButton"
+                                                         Grid.Row="1"
+                                                         Style="{StaticResource buttonStyleInAddingTask}"
+                                                         ImageSource="calendar.png"/>
+                            <customElementButton:XButton Text="Повтор задания"
+                                                         x:Name="taskRepeatButton"
+                                                         Grid.Row="2"
+                                                         Style="{StaticResource buttonStyleInAddingTask}"
+                                                         ImageSource="calendar.png"/>
                         </Grid>
-            </StackLayout>
-            </Frame>
-        </Grid>
+                    </StackLayout>
+                </Frame>
+                
+                <Frame HasShadow="True"
+                       Padding="0,0,0,0"
+                       Grid.Row="2"
+                       Margin="5,0,5,15"
+                       CornerRadius="20">
+                    <customElementButton:XButton Text="Вложения"
+                                                 x:Name="addAttachmentButton"
+                                                 Style="{StaticResource buttonStyleInAddingTask}"
+                                                 ImageSource="attach.png"/>
+                </Frame>
+                
+                <Frame HasShadow="True"
+                       Padding="0,0,0,0"
+                       Grid.Row="3"
+                       Margin="5,0,5,15"
+                       CornerRadius="20">
+                    <Grid RowDefinitions="auto"
+                          ColumnDefinitions="auto">
+                        <Image Source="document.png"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               Margin="0,0,0,8"/>
+                        <customElementEditor:XEditor Placeholder="Добвить описание"
+                                                     Grid.Row="0"
+                                                     Grid.Column="1"
+                                                     MaxLength="512"
+                                                     x:Name="taskDescreption"
+                                                     Text="{Binding Description}"
+                                                     AutoSize="TextChanges"
+                                                     FontAttributes="Bold"/>
+                    </Grid>
+                </Frame>
+                
+            </Grid>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

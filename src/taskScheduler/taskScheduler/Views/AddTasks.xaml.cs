@@ -46,7 +46,11 @@ namespace taskScheduler.Views
 
         protected override void OnAppearing()
         {
-            
+            TaskFilds task = new TaskFilds();
+
+            taskStartButton.Text += $"{task.TaskCreatedDate}";
+            taskCompletionButton.Text += $"{task.TaskCreatedDate}";
+
             base.OnAppearing();
         }
         protected override bool OnBackButtonPressed()
@@ -114,6 +118,13 @@ namespace taskScheduler.Views
                 taskName.Effects.Clear();
                 
         }
+        private async void SaveTaskName_Completed(object sender, EventArgs e)
+        {
+            TaskFilds task = (TaskFilds)BindingContext;
+
+            if (!string.IsNullOrWhiteSpace(task.Name))
+                await App.TasksDB.SaveTaskAsync(task);
+        }
 
         /*public async void AddStep_Completed(object sender, EventArgs e)
         {
@@ -174,13 +185,5 @@ namespace taskScheduler.Views
             else
                 stepTask.Effects.Clear();
         }*/
-
-        private async void SaveTaskName_Completed(object sender, EventArgs e)
-        {
-            TaskFilds task = (TaskFilds)BindingContext;
-
-            if (!string.IsNullOrWhiteSpace(task.Name))
-                await App.TasksDB.SaveTaskAsync(task);
-        }
     }
 }

@@ -2,6 +2,7 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:views ="clr-namespace:taskScheduler.Views"
+       xmlns:customElementButton="clr-namespace:taskScheduler.Views.RendererAndEffects"
        Title="taskScheduler"
        x:Class="taskScheduler.AppShell" >
 
@@ -59,6 +60,8 @@
             </Style>
         </ResourceDictionary>
     </Shell.Resources>
+    
+
 
     <FlyoutItem Title="О приложении" Icon="icon_about.png">
         <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate views:AboutPage}" />
