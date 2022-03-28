@@ -25,7 +25,7 @@ namespace taskScheduler.Views
         public ObservableCollection<TaskFilds> TasksList { get; set; }
         public IEnumerable<TaskFilds> Selectdd { get; set; }
         public AsyncCommand RefreshCommand { get; }
-
+        public static TimeSpan MicroTime = new TimeSpan();
         public static DateTime Date = new DateTime();
         public static bool check = true;
         DateTime Tomorrow = new DateTime();
@@ -83,7 +83,6 @@ namespace taskScheduler.Views
         {
             TaskFilds task = (TaskFilds)BindingContext;
 
-            task.TaskCreatedDate = DateTime.Now.ToString("dd.MM.yyyy");
 
             await Shell.Current.GoToAsync(nameof(AddTasks));
             
@@ -140,7 +139,8 @@ namespace taskScheduler.Views
         }
         private async void Button_Clicked_Calendar(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Calendar());
+            await Navigation.PushAsync(new Calendar(true));
         }
+
     }
 }

@@ -83,7 +83,7 @@ namespace taskScheduler.Views
         {
             TaskFilds task = (TaskFilds)BindingContext;
 
-            /*task.TaskCreatedDate = TasksListView.Date.ToString("dd.MM.yyyy");*/
+            task.TaskCreatedDate = TasksListView.Date.ToString("dd.MM.yyyy");
 
             if (!string.IsNullOrWhiteSpace(task.Name))
                 await App.TasksDB.SaveTaskAsync(task);
@@ -123,6 +123,12 @@ namespace taskScheduler.Views
 
             if (!string.IsNullOrWhiteSpace(task.Name))
                 await App.TasksDB.SaveTaskAsync(task);
+        }
+
+        private async void taskStartButton_Clicked(object sender, EventArgs e)
+        {
+            
+            await Navigation.PushAsync(new Calendar(false));
         }
 
         /*public async void AddStep_Completed(object sender, EventArgs e)
