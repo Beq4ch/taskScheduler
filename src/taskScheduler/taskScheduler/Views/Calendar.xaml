@@ -10,6 +10,10 @@
                              x:Name="Calendarobj" 
                              DateSelectionChanged="Calendarobj_DateSelectionChanged" 
                              SelectionType="Single"/>
+            <StackLayout x:Name="TimePickerStack">
+                <Label x:Name="label" Text="Выберите время начала задачи" FontSize="Medium" IsVisible="false"/>
+                <TimePicker x:Name="timePicker" Time="17:00:00" PropertyChanged="timePicker_PropertyChanged" IsVisible="false"></TimePicker>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

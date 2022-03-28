@@ -150,6 +150,12 @@ namespace taskScheduler.Views
             await Navigation.PushAsync(new Calendar());
         }
 
+        private async void taskStartButton_Clicked(object sender, EventArgs e)
+        {
+            
+            await Navigation.PushAsync(new Calendar(false));
+        }
+
         /*public async void AddStep_Completed(object sender, EventArgs e)
         {
             rowsCount++;
