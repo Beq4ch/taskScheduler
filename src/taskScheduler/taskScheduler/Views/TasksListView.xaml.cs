@@ -35,6 +35,8 @@ namespace taskScheduler.Views
         {
             InitializeComponent();
 
+
+
             Date = DateTime.Today;
             Tomorrow = Date.AddDays(1);
             DayAfterTomorrow = Date.AddDays(2);
@@ -66,14 +68,14 @@ namespace taskScheduler.Views
                 else
                     Plus.IsEnabled = true;
          }
+
         protected override async void OnAppearing()
         {
-            
-
             BindingContext = new TaskFilds();
 
             listView.ItemsSource = await App.TasksDB.db.QueryAsync<TaskFilds>(
                "SELECT * FROM Tasks WHERE TaskCreatedDate = ?", DateTime.Now.ToString("dd.MM.yyyy"));
+
 
             SearchByDate(Date);
 
@@ -86,7 +88,7 @@ namespace taskScheduler.Views
             task.TaskCreatedDate = DateTime.Now.ToString("dd.MM.yyyy");
 
             await Shell.Current.GoToAsync(nameof(AddTasks));
-            
+
         }
 
         private async void OnSelectionChanged(object sender, ItemTappedEventArgs e)
@@ -142,5 +144,6 @@ namespace taskScheduler.Views
         {
             await Navigation.PushAsync(new Calendar());
         }
+
     }
 }

@@ -25,6 +25,7 @@ namespace taskScheduler.Views
             try
             {
                 TasksListView.Date = Calendarobj.SelectedDates.Last();
+                AddTasks.Date = Calendarobj.SelectedDates.Last();
                 await Navigation.PopAsync();
             }
             catch { }

@@ -4,6 +4,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
+using Plugin.LocalNotification;
 
 namespace taskScheduler.Droid
 {
@@ -13,6 +14,12 @@ namespace taskScheduler.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
+            NotificationCenter.CreateNotificationChannel(new
+                Plugin.LocalNotification.Platform.Droid.NotificationChannelRequest { 
+                LightColor = Android.Graphics.Color.BlueViolet,
+                EnableLights = true
+            });
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

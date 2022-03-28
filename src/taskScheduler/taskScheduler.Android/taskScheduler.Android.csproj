@@ -58,6 +58,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Plugin.LocalNotification">
+      <Version>8.0.1</Version>
+    </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.8.116</Version>
     </PackageReference>
@@ -65,6 +68,7 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="CustomInterfaceRepresentation\AndroidStrikethroughEditorEffect.cs" />
     <Compile Include="CustomInterfaceRepresentation\XButtonRenderer.cs" />
     <Compile Include="CustomInterfaceRepresentation\XEditorRenderer.cs" />

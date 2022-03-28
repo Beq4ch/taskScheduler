@@ -42,33 +42,37 @@
                                       IconImageSource="delete.png"/>
                         </ViewCell.ContextActions>
                             <Grid>
-                                <StackLayout>
-                                    <Grid Margin="0,5,5,0"
-                                          ColumnDefinitions="0.8*,0.2*"
-                                          RowDefinitions="25,20">
+                                <Frame HasShadow="True"
+                                       CornerRadius="20"
+                                       Margin="10,10,10,10">
+                                    <StackLayout>
+                                        <Grid Margin="0,5,5,0"
+                                              ColumnDefinitions="1*"
+                                              RowDefinitions="25,20,20">
 
-                                        <Label Text="{Binding Name}"
-                                               FontSize="Medium"
-                                               Padding="5,0,0,0"
-                                               TextColor="Black"
-                                               Grid.Row="0"
-                                               Grid.Column="0"/>
+                                            <Label Text="{Binding Name}"
+                                                   x:Name="taskName"
+                                                   FontSize="Medium"
+                                                   Padding="5,0,0,0"
+                                                   TextColor="Black"
+                                                   Grid.Row="0"
+                                                   Grid.Column="0"/>
 
-                                        <Label Text="{Binding Description}"
-                                               TextColor="Gray"
-                                               Padding="10,0,0,0"
-                                               FontSize="Small"
-                                               Grid.Row="1"
-                                               Grid.Column="0"/>
+                                            <Label Text="{Binding Description}"
+                                                   TextColor="Gray"
+                                                   Padding="10,0,0,0"
+                                                   FontSize="Small"
+                                                   Grid.Row="1"
+                                                   Grid.Column="0"/>
 
-                                        <Label Text="{Binding TaskCreatedDate}"
-                                               TextColor="Silver"
-                                               Padding="0,0,0,5"
-                                               FontSize="Small"
-                                               Grid.Row="0"
-                                               Grid.Column="1"/>
-                                    </Grid>
-                                </StackLayout>
+                                            <Label Text="{Binding CompletionDate}"
+                                                   TextColor="Silver"
+                                                   FontSize="Small"
+                                                   Grid.Row="2"
+                                                   Grid.Column="0"/>
+                                        </Grid>
+                                    </StackLayout>
+                                </Frame>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

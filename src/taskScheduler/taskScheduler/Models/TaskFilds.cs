@@ -14,6 +14,8 @@ namespace taskScheduler.Models
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         public string Name { get; set; }
+        public string CompletionDate { get; set; }
+        public bool IsCompleted { get; set; }
 
         /*[OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<StepTask> Step { get; set; }*/

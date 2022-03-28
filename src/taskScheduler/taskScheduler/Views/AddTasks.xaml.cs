@@ -7,8 +7,11 @@ using taskScheduler.Models;
 using Xamarin.Forms;
 using taskScheduler.Views.RendererAndEffects;
 using Xamarin.Forms.BehaviorsPack;
+using Xamarin.Forms.Platform;
+using Plugin.LocalNotification;
 using taskScheduler.CustomInterfaceRepresentation;
 using IntelliAbb.Xamarin.Controls;
+using Android.App;
 
 namespace taskScheduler.Views
 {
@@ -16,7 +19,8 @@ namespace taskScheduler.Views
     public partial class AddTasks : ContentPage
     {
         public int rowsCount = 0;
-        
+
+        public static DateTime Date = new DateTime();
         public string ItemID 
         { 
             set
@@ -75,7 +79,6 @@ namespace taskScheduler.Views
 
                 }
             });
-
             return true;
         }
 
@@ -83,7 +86,7 @@ namespace taskScheduler.Views
         {
             TaskFilds task = (TaskFilds)BindingContext;
 
-            /*task.TaskCreatedDate = TasksListView.Date.ToString("dd.MM.yyyy");*/
+            task.TaskCreatedDate = TasksListView.Date.ToString("dd.MM.yyyy");
 
             if (!string.IsNullOrWhiteSpace(task.Name))
                 await App.TasksDB.SaveTaskAsync(task);
@@ -94,7 +97,6 @@ namespace taskScheduler.Views
                 await Shell.Current.GoToAsync("..");
 
             }
-                
 
             await Shell.Current.GoToAsync("..");
         }
@@ -121,8 +123,31 @@ namespace taskScheduler.Views
         {
             TaskFilds task = (TaskFilds)BindingContext;
 
-            if (!string.IsNullOrWhiteSpace(task.Name))
+            if (!string.IsNullOrWhiteSpace(task.Name) && !string.IsNullOrWhiteSpace(task.Description))
                 await App.TasksDB.SaveTaskAsync(task);
+        }
+        private void taskStartDateAndTimeButton(object sender, EventArgs e)
+        {
+
+            var notification = new Plugin.LocalNotification.NotificationRequest
+            {
+                BadgeNumber = 1,
+                Description = "Test Description",
+                Title = "Notification",
+                ReturningData = "Dummy Data",
+                NotificationId = 1,
+                Schedule = {
+                    NotifyTime = DateTime.Now.AddSeconds(3)
+                    /*NotifyRepeatInterval = */
+                }
+
+            };
+
+            NotificationCenter.Current.Show(notification);
+        }
+        private async void deadlineForCompletingTaskButton(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Calendar());
         }
 
         /*public async void AddStep_Completed(object sender, EventArgs e)

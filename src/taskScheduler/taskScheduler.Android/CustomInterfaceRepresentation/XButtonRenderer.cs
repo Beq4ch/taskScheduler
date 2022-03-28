@@ -28,7 +28,7 @@ namespace taskScheduler.Droid.CustomInterfaceRepresentation
             base.OnElementChanged(e);
             var button = this.Control;
             button.SetAllCaps(false);
-            button.Gravity = GravityFlags.ClipHorizontal;
+            button.Gravity = GravityFlags.CenterVertical;
         }
     }
 }
