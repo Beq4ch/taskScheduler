@@ -25,26 +25,29 @@ namespace taskScheduler.Views
         public ObservableCollection<TaskFilds> TasksList { get; set; }
         public IEnumerable<TaskFilds> Selectdd { get; set; }
         public AsyncCommand RefreshCommand { get; }
+
         public static TimeSpan MicroTime = new TimeSpan();
         public static DateTime Date = new DateTime();
         public static bool check = true;
         DateTime Tomorrow = new DateTime();
         DateTime DayAfterTomorrow = new DateTime();
         DateTime Yesterday = new DateTime();
+        DateTime DayAfterYesterday = new DateTime();
         public TasksListView()
         {
             InitializeComponent();
 
-
-
             Date = DateTime.Today;
+
             Tomorrow = Date.AddDays(1);
             DayAfterTomorrow = Date.AddDays(2);
             Yesterday = Date.AddDays(-1);
+            DayAfterYesterday = Date.AddDays(-2);
             ButYesterday.Text = $"{Yesterday.ToString("dd.MM.yyyy")}\n{Yesterday.ToString("ddd")}\nВчера";
             ButToday.Text = $"{Date.ToString("dd.MM.yyyy")}\n{Date.ToString("ddd")}\nСегодня";
             ButTomorrow.Text = $"{Tomorrow.ToString("dd.MM.yyyy")}\n{Tomorrow.ToString("ddd")}\nЗавтра";
             ButAfterTomorrow.Text = $"{DayAfterTomorrow.ToString("dd.MM.yyyy")}\n{DayAfterTomorrow.ToString("ddd")}\nПослезавтра";
+            ButAfterYesterday.Text = $"{DayAfterYesterday.ToString("dd.MM.yyyy")}\n{DayAfterYesterday.ToString("ddd")}\nПозавчера";
 
             RefreshCommand = new AsyncCommand(Refresh);
         } 
@@ -106,18 +109,16 @@ namespace taskScheduler.Views
 
             await App.TasksDB.DeleteNoteAsync(task);
 
+
         }
         public async Task Refresh()
         {
-            IsBusy = true;
 
             await Task.Delay(2000);
 
-            TasksList.Clear();
-
+            listView.ItemsSource = await App.TasksDB.db.QueryAsync<TaskFilds>(
+               "SELECT * FROM Tasks WHERE TaskCreatedDate = ?", Date.ToString("dd.MM.yyyy"));
             /*listView.ItemsSource = await App.TasksDB.GetTasksAsync();*/
-
-            IsBusy = false;
         }
 
         private void Button_Clicked_ToDay(object sender, EventArgs e)
@@ -134,10 +135,17 @@ namespace taskScheduler.Views
         {
             Date = DayAfterTomorrow;
             SearchByDate(DayAfterTomorrow);
-        }private void Button_Clicked_Yesterday(object sender, EventArgs e)
+        }
+        private void Button_Clicked_Yesterday(object sender, EventArgs e)
         {
             Date = Yesterday;
             SearchByDate(Yesterday);
+        }
+
+        private void Button_Clicked_Afet_Yesterday(object sender, EventArgs e)
+        {
+            Date = DayAfterYesterday;
+            SearchByDate(DayAfterYesterday);
         }
         private async void Button_Clicked_Calendar(object sender, EventArgs e)
         {

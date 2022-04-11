@@ -20,6 +20,7 @@ namespace taskScheduler.Data
         public Task<List<TaskFilds>> GetTasksAsync()
         {
             return db.Table<TaskFilds>().ToListAsync();
+            
         }
         /*public Task<List<StepTask>> GetStepTaskAsync()
         {

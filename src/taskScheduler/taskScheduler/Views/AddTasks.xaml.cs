@@ -126,8 +126,9 @@ namespace taskScheduler.Views
             if (!string.IsNullOrWhiteSpace(task.Name) && !string.IsNullOrWhiteSpace(task.Description))
                 await App.TasksDB.SaveTaskAsync(task);
         }
-        private void taskStartDateAndTimeButton(object sender, EventArgs e)
+        private async void taskStartDateAndTimeButton(object sender, EventArgs e)
         {
+            /*await Navigation.PushAsync(new Calendar(false));*/
 
             var notification = new Plugin.LocalNotification.NotificationRequest
             {
@@ -143,17 +144,11 @@ namespace taskScheduler.Views
 
             };
 
-            NotificationCenter.Current.Show(notification);
+            await NotificationCenter.Current.Show(notification);
         }
         private async void deadlineForCompletingTaskButton(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Calendar());
-        }
-
-        private async void taskStartButton_Clicked(object sender, EventArgs e)
-        {
-            
-            await Navigation.PushAsync(new Calendar(false));
+            /*await Navigation.PushAsync(new Calendar(fa));*/
         }
 
         /*public async void AddStep_Completed(object sender, EventArgs e)

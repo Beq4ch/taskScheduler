@@ -4,7 +4,8 @@
        xmlns:views ="clr-namespace:taskScheduler.Views"
        xmlns:customElementButton="clr-namespace:taskScheduler.Views.RendererAndEffects"
        Title="taskScheduler"
-       x:Class="taskScheduler.AppShell" >
+       xmlns:sys="clr-namespace:System;assembly=netstandard"
+       x:Class="taskScheduler.AppShell">
 
     <Shell.Resources>
         <ResourceDictionary>
@@ -60,7 +61,31 @@
             </Style>
         </ResourceDictionary>
     </Shell.Resources>
-    
+
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid HeightRequest="50"
+                  WidthRequest="50"
+                  BackgroundColor="#03fcec">
+                <Image Aspect="AspectFill"
+                       Source="logo_task_scheduler.png"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <StackLayout>
+                <Label Text="Task Scheduler"
+                       TextColor="Black"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" />
+                <Label Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:MMM dd, yyyy}'}"
+                       TextColor="Black"
+                       HorizontalOptions="Center" />
+            </StackLayout>
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
 
 
     <FlyoutItem Title="О приложении" Icon="icon_about.png">

@@ -25,14 +25,15 @@
         
         <ScrollView Grid.Row="1">
             <StackLayout Orientation="Vertical"
-                                 HorizontalOptions="StartAndExpand"
-                                 Padding="30,15,30,24" 
-                                 Spacing="10"
-                                 x:Name="stckL1">
-
-                <Label FontSize="Title" 
-                               Padding="0,10,0,0">
-                    <Label.FormattedText>
+                         HorizontalOptions="StartAndExpand"
+                         Padding="15,15,15,15" 
+                         Spacing="10"
+                         x:Name="stckL1">
+                
+                <Frame CornerRadius="25"
+                       HasShadow="True">
+                    <Label FontSize="Title">
+                        <Label.FormattedText>
                         <FormattedString>
                             <FormattedString.Spans>
                                 <Span Text="Task shceduler " 
@@ -43,11 +44,15 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
+                </Frame>
 
-                <Label Text="Вы можете не переживать о том, что забудете выполнить какую-либо задачу разной степени важности, в случае, если запишите её в данном приложении. Приложение напомнит вам о её начале, на основе заданного промежутка времени напоминания." 
-                               FontSize="16" 
-                               Padding="0,0,0,0"
-                               HorizontalTextAlignment="Start"/>
+                <Frame CornerRadius="25"
+                       HasShadow="True">
+                    <Label Text="Вы можете не переживать о том, что забудете выполнить какую-либо задачу разной степени важности, в случае, если запишите её в данном приложении. Приложение напомнит вам о её начале, на основе заданного промежутка времени напоминания." 
+                           FontSize="16" 
+                           Padding="0,0,0,0"
+                           HorizontalTextAlignment="Start"/>
+                </Frame>
 
             </StackLayout>
         </ScrollView>

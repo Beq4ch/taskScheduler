@@ -13,13 +13,9 @@
                      x:Name="Plus"
                      Clicked="AddButtonClick_Clicked"/>
     </ContentPage.ToolbarItems>
-   
-        <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
 
+    <Grid RowDefinitions="auto, 80">
+        
         <StackLayout>
             <ListView IsPullToRefreshEnabled="True"
                       x:FieldModifier="public"
@@ -35,12 +31,12 @@
                       ItemTapped="OnSelectionChanged"
                       Grid.Row="0">
                 <ListView.ItemTemplate>
-                <DataTemplate x:Name="dataTemplateListView">
-                    <ViewCell>
-                        <ViewCell.ContextActions>
-                            <MenuItem Clicked="DeleteTask_Clicked"
+                    <DataTemplate x:Name="dataTemplateListView">
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Clicked="DeleteTask_Clicked"
                                       IconImageSource="delete.png"/>
-                        </ViewCell.ContextActions>
+                            </ViewCell.ContextActions>
                             <Grid>
                                 <Frame HasShadow="True"
                                        CornerRadius="20"
@@ -79,33 +75,50 @@
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
-        <StackLayout VerticalOptions="End">
-            <Grid ColumnDefinitions="auto, auto, auto, auto">
-                <Button x:Name="ButYesterday"
-                        Grid.Column="1"
-                        FontAttributes="Bold"
-                        FontSize="9"   
-                        Clicked="Button_Clicked_Yesterday"
-                        CornerRadius="65"/>
-                <Button x:Name="ButToday"
-                        Grid.Column="2"
-                        FontAttributes="Bold"
-                        FontSize="9"   
-                        Clicked="Button_Clicked_ToDay"
-                        CornerRadius="65"/>
-                <Button x:Name="ButTomorrow"
-                        Grid.Column="3"
-                        FontAttributes="Bold"
-                        FontSize="9"                      
-                        Clicked="Button_Clicked_Tomorrow"
-                        CornerRadius="65"/>       
-                <Button x:Name="ButAfterTomorrow"
-                        Grid.Column="4"
-                        FontAttributes="Bold"
-                        FontSize="9"
-                        Clicked="Button_Clicked_Afet_Tomorrow"
-                        CornerRadius="65"/>
-            </Grid>
-        </StackLayout>
+        <Frame HasShadow="True"
+               Grid.Row="1">
+            <StackLayout VerticalOptions="End"
+                         Padding="-20,-10,-20,-10">
+
+                <Grid ColumnDefinitions="0.7*, 0.7*, 0.7*, 0.7*, 0.7*">
+
+                    <Button x:Name="ButAfterYesterday"
+                            Grid.Column="0"
+                            FontAttributes="Bold"
+                            FontSize="9"   
+                            Clicked="Button_Clicked_Afet_Yesterday"
+                            CornerRadius="65"
+                            BackgroundColor="White"/>
+                    <Button x:Name="ButYesterday"
+                            Grid.Column="1"
+                            FontAttributes="Bold"
+                            FontSize="9"   
+                            Clicked="Button_Clicked_Yesterday"
+                            CornerRadius="65"
+                            BackgroundColor="White"/>
+                    <Button x:Name="ButToday"
+                            Grid.Column="2"
+                            FontAttributes="Bold"
+                            FontSize="9"   
+                            Clicked="Button_Clicked_ToDay"
+                            CornerRadius="65"
+                            BackgroundColor="White"/>
+                    <Button x:Name="ButTomorrow"
+                            Grid.Column="3"
+                            FontAttributes="Bold"
+                            FontSize="9"                      
+                            Clicked="Button_Clicked_Tomorrow"
+                            CornerRadius="65"
+                            BackgroundColor="White"/>
+                    <Button x:Name="ButAfterTomorrow"
+                            Grid.Column="4"
+                            FontAttributes="Bold"
+                            FontSize="9"
+                            Clicked="Button_Clicked_Afet_Tomorrow"
+                            CornerRadius="65"
+                            BackgroundColor="White"/>
+                </Grid>
+            </StackLayout>
+        </Frame>
     </Grid>
 </ContentPage>

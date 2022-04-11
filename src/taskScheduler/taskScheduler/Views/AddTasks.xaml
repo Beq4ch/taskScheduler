@@ -111,8 +111,7 @@
                                                          Clicked="taskStartDateAndTimeButton"
                                                          Grid.Row="0"
                                                          Style="{StaticResource buttonStyleInAddingTask}"
-                                                         ImageSource="calendar.png"
-                                                         Clicked="taskStartButton_Clicked"/>
+                                                         ImageSource="calendar.png"/>
                             <customElementButton:XButton Text="Срок выполнения"
                                                          x:Name="taskCompletionButton"
                                                          Clicked="deadlineForCompletingTaskButton"

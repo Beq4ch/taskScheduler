@@ -34,7 +34,7 @@ namespace taskScheduler.Views
 
         }
 
-        private async void timePicker_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void timePicker_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             TasksListView.MicroTime = timePicker.Time;
 
